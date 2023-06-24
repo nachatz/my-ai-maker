@@ -14,6 +14,10 @@ run:
 	$(GOBUILD) -o $(BINARY_NAME)
 	./$(BINARY_NAME)
 
+clean:
+	rm go.mod
+	rm $(BINARY_NAME)
+
 # automated deploy ignore for now
 install:
 	$(GOBUILD) -o $(BINARY_NAME) -v ./...

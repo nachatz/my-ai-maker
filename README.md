@@ -1,5 +1,5 @@
 # My Ai Maker
-My AI Maker is a web application that enables users to upload their own datasets and train machine learning models. This application provides an intuitive interface for dataset management, model training, and result visualization.
+My AI Maker is a web application that enables users to upload their own datasets and train machine learning models with zero knowledge of machine learning required. This application provides an intuitive interface for dataset management, model training, and result visualization.
 
 # Features
     - WIP

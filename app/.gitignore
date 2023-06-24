@@ -1,0 +1,7 @@
+# use makefile to generate
+go.mod
+go.sum
+
+# ignore build files
+my-ai-maker
+

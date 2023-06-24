@@ -1,17 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/nachatz/my-ai-maker/app/handlers"
 )
 
 func main() {
-	http.HandleFunc("/", helloHandler)
+	http.HandleFunc("/process", handlers.ProcessHandler)
 	log.Println("Server started on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, World!")
 }

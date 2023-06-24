@@ -17,7 +17,8 @@ The following API endpoints are available:
 1. **POST /api/process**:
 
     Request Body: JSON payload containing the data in CSV format.
-    Response: OK status 200, Bad Request 400, Internal Server Error 500 (needs updating), 
+
+    Response: OK status 200, Bad Request 400, & Internal Server Error 500 (needs updating)
 
 # To-Do
 

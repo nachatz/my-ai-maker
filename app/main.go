@@ -9,7 +9,15 @@ import (
 )
 
 func main() {
+
+	// Register the handlers
 	http.HandleFunc(api.EndpointProcess, handlers.ProcessHandler)
-	log.Println("Server started on http://localhost:8080 routed at: " + api.Endpoint)
+
+	// Log the api endpoints
+	log.Printf("API endpoints: %s", api.Endpoint)
+	log.Printf("API endpoint process: %s", api.EndpointProcess)
+
+	// Start the server on port 8080
 	log.Fatal(http.ListenAndServe(":8080", nil))
+
 }

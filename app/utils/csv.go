@@ -3,6 +3,7 @@ package utils
 import (
 	"encoding/csv"
 	"io"
+	"strings"
 )
 
 func ParseCSV(reader io.Reader) ([][]string, error) {
@@ -12,4 +13,22 @@ func ParseCSV(reader io.Reader) ([][]string, error) {
 		return nil, err
 	}
 	return records, nil
+}
+
+func Contains(vals []string, search string) bool {
+	for _, entry := range vals {
+		if entry == search {
+			return true
+		}
+	}
+	return false
+}
+
+func TrimSpaces(vals []string) []string {
+	// Trim the spaces from the headers
+	for i, entry := range vals {
+		vals[i] = strings.TrimSpace(entry)
+	}
+
+	return vals
 }

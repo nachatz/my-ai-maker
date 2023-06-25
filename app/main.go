@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nachatz/my-ai-maker/app/handlers"
 	"github.com/nachatz/my-ai-maker/app/api"
+	"github.com/nachatz/my-ai-maker/app/handlers"
 )
 
 func main() {

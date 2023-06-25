@@ -28,7 +28,6 @@ func ProcessHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-
 	result := models.Result{
 		Message: "CSV file processed successfully",
 	}

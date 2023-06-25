@@ -14,6 +14,9 @@ run:
 	$(GOBUILD) -o $(BINARY_NAME)
 	./$(BINARY_NAME)
 
+fmt:
+	$(GOCMD) fmt ./...
+
 clean:
 	rm go.mod
 	rm $(BINARY_NAME)
@@ -23,4 +26,4 @@ install:
 	$(GOBUILD) -o $(BINARY_NAME) -v ./...
 	cp $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
 
-.PHONY: init run clean
+.PHONY: init run fmt clean

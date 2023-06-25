@@ -9,6 +9,9 @@ BINARY_NAME = my-ai-maker
 init:
 	$(GOCMD) mod init github.com/nachatz/my-ai-maker/app 
 
+build:
+	$(GOBUILD) -o $(BINARY_NAME)
+
 run:
 	$(GOTIDY)
 	$(GOBUILD) -o $(BINARY_NAME)
@@ -26,4 +29,4 @@ install:
 	$(GOBUILD) -o $(BINARY_NAME) -v ./...
 	cp $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
 
-.PHONY: init run fmt clean
+.PHONY: init build run fmt clean

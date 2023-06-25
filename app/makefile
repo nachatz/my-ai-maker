@@ -1,32 +1,33 @@
 # Go parameters
-GOCMD   = go
-GOBUILD = $(GOCMD) build
-GOTIDY  = $(GOCMD) mod tidy
-
-# Binary name
-BINARY_NAME = my-ai-maker
+GOCMD    := go
+GOBUILD  := $(GOCMD) build
+GOMOD    := $(GOCMD) mod
+GOFMT    := $(GOCMD) fmt
+BINARY_NAME := my-ai-maker
 
 init:
-	$(GOCMD) mod init github.com/nachatz/my-ai-maker/app 
+	$(GOMOD) init github.com/nachatz/my-ai-maker/app
 
 build:
 	$(GOBUILD) -o $(BINARY_NAME)
 
-run:
-	$(GOTIDY)
-	$(GOBUILD) -o $(BINARY_NAME)
+run: tidy build
 	./$(BINARY_NAME)
 
+tidy:
+	$(GOMOD) tidy
+
 fmt:
-	$(GOCMD) fmt ./...
+	$(GOFMT) ./...
 
 clean:
-	rm go.mod
-	rm $(BINARY_NAME)
+	@echo "Cleaning up..."
+	@rm -f go.mod
+	@rm -f go.sum
+	@rm -f $(BINARY_NAME)
 
-# automated deploy ignore for now
-install:
-	$(GOBUILD) -o $(BINARY_NAME) -v ./...
-	cp $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
+install: build
+	@echo "Installing $(BINARY_NAME)..."
+	@cp $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
 
-.PHONY: init build run fmt clean
+.PHONY: init build run tidy fmt clean install

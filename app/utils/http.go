@@ -7,7 +7,11 @@ import (
 	"github.com/nachatz/my-ai-maker/app/models"
 )
 
-func WriteResponse(w http.ResponseWriter, result models.Result) {
+func WriteResponse(w http.ResponseWriter, result models.Response) {
+	/* WriteResponse - Writes the provided response model as JSON to the http.ResponseWriter.
+	   @Param w - The http.ResponseWriter to write the response to.
+	   @Param result - The models.Response containing the data to be written as JSON.
+	*/
 	response, err := json.Marshal(result)
 	if err != nil {
 		http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
@@ -15,6 +19,6 @@ func WriteResponse(w http.ResponseWriter, result models.Result) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(result.Result)
+	w.WriteHeader(result.StatusCode)
 	w.Write(response)
 }

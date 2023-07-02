@@ -5,3 +5,5 @@ go.sum
 # ignore build files
 my-ai-maker
 
+# ignore env
+.env

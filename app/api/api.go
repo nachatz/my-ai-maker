@@ -9,5 +9,6 @@ const (
 
 // API endpoints
 const (
-	EndpointProcess = EndpointSuffix + "/process"
+	EndpointProcess   = EndpointSuffix + "/process"
+	EndpointAuthToken = EndpointSuffix + "/jwt"
 )

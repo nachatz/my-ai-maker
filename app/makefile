@@ -5,6 +5,9 @@ GOMOD    := $(GOCMD) mod
 GOFMT    := $(GOCMD) fmt
 BINARY_NAME := my-ai-maker
 
+list: 
+	echo Commands: init build run tidy fmt clean [install]
+
 init:
 	$(GOMOD) init github.com/nachatz/my-ai-maker/app
 

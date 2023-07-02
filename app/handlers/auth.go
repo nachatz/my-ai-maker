@@ -32,7 +32,7 @@ func generateJwtResponse(r *http.Request, clientSecret string) models.Response {
 
 	// Set the claims (payload) of the token
 	claims := token.Claims.(jwt.MapClaims)
-	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+	claims["exp"] = time.Now().Add(time.Minute * 45).Unix()
 
 	// Generate the signed token string using the client secret
 	tokenString, err := token.SignedString([]byte(clientSecret))

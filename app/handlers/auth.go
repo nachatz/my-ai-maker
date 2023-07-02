@@ -15,15 +15,7 @@ func GenerateJWTHandler(w http.ResponseWriter, r *http.Request, clientSecret str
 	   @Param r - The *http.Request representing the incoming request.
 	*/
 
-	var response models.Response
-
-	if r.Method != http.MethodGet {
-		response.Message = "Method not allowed"
-		response.StatusCode = http.StatusMethodNotAllowed
-	} else {
-		response = generateJwtResponse(r, clientSecret)
-	}
-
+	var response models.Response = generateJwtResponse(r, clientSecret)
 	utils.WriteResponse(w, response)
 }
 

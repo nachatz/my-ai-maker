@@ -14,15 +14,7 @@ func ProcessHandler(w http.ResponseWriter, r *http.Request) {
 	   @Param r - The *http.Request representing the incoming request.
 	*/
 
-	var response models.Response
-
-	if r.Method != http.MethodPost {
-		response.Message = "Method not allowed"
-		response.StatusCode = http.StatusMethodNotAllowed
-	} else {
-		response = processCsvResponse(r)
-	}
-
+	var response models.Response = processCsvResponse(r)
 	utils.WriteResponse(w, response)
 }
 

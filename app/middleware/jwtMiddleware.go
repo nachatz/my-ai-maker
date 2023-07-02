@@ -10,6 +10,11 @@ import (
 )
 
 func JwtMiddleware(next http.Handler, clientSecret string) http.Handler {
+	/* JwtMiddleware - Middleware function for JWT authentication.
+	   @Param next - The next http.Handler in the chain.
+	   @Param clientSecret - The client secret key used for token verification.
+	   @Return http.Handler - The middleware handler.
+	*/
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		// Extract the JWT token from the Authorization header
@@ -30,6 +35,10 @@ func JwtMiddleware(next http.Handler, clientSecret string) http.Handler {
 }
 
 func getTokenFromAuthHeader(authHeader string) string {
+	/* getTokenFromAuthHeader - Extracts the token string from the Authorization header.
+	   @Param authHeader - The Authorization header string.
+	   @Return string - The token string.
+	*/
 	if authHeader != "" && strings.HasPrefix(authHeader, "Bearer ") {
 		return authHeader[7:]
 	}
@@ -37,6 +46,12 @@ func getTokenFromAuthHeader(authHeader string) string {
 }
 
 func verifyToken(tokenString string, clientSecret string) (jwt.MapClaims, error) {
+	/* verifyToken - Verifies the JWT token using the provided client secret.
+	   @Param tokenString - The JWT token string.
+	   @Param clientSecret - The client secret key used for token verification.
+	   @Return jwt.MapClaims - The token claims if the verification is successful.
+	   @Return error - An error if the verification fails.
+	*/
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return []byte(clientSecret), nil
 	})
@@ -54,5 +69,10 @@ func verifyToken(tokenString string, clientSecret string) (jwt.MapClaims, error)
 }
 
 func setClaimsToContext(ctx context.Context, claims jwt.MapClaims) context.Context {
+	/* setClaimsToContext - Sets the token claims to the context.
+	   @Param ctx - The context to set the claims to.
+	   @Param claims - The token claims.
+	   @Return context.Context - The updated context with claims.
+	*/
 	return context.WithValue(ctx, "claims", claims)
 }

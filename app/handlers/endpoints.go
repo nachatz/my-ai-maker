@@ -20,18 +20,37 @@ func InitializeRoutes() *mux.Router {
 
 	// load in environment variables from .env file using os package
 	clientSecret := os.Getenv("CLIENT_SECRET")
-	if clientSecret == "" {
+	clientId := os.Getenv("CLIENT_ID")
+	if clientSecret == "" || clientId == "" {
 		log.Fatal("CLIENT_SECRET environment variable not set")
 		return nil
 	}
 
 	// Routes
 	router.Handle(api.EndpointProcess, middleware.JwtMiddleware(http.HandlerFunc(ProcessHandler), clientSecret)).Methods("POST")
-	router.HandleFunc(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) { GenerateJWTHandler(w, r, clientSecret) }).Methods("POST")
+	router.HandleFunc(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) { GenerateJWTHandler(w, r, clientSecret, clientId) }).Methods("POST")
 	router.MethodNotAllowedHandler = methodNotAllowedHandler()
+
+	// log the names of all the endpoints in the router
+	logEndpointNames(router)
 
 	return router
 
+}
+
+func logEndpointNames(router *mux.Router) {
+	/* logEndpointNames - Logs the names of all the endpoints in the router.
+	   @Param *mux.Router - The router to log the endpoint names of.
+	*/
+	router.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
+		path, err := route.GetPathTemplate()
+		if err != nil {
+			log.Fatal("Error getting path template")
+			return err
+		}
+		log.Println("Endpoint:", path)
+		return nil
+	})
 }
 
 func methodNotAllowedHandler() http.Handler {

@@ -22,8 +22,13 @@ func main() {
 	// Initialize the router
 	router := InitRoutes(config)
 
+	server := &http.Server{
+		Addr:    ":" + config.Port,
+		Handler: router,
+	}
+
 	// Start the server on the specified port
 	log.Println("Starting server on port " + config.Port)
-	log.Fatal(http.ListenAndServe(":"+config.Port, router))
+	log.Fatal(server.ListenAndServe())
 
 }

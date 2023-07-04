@@ -2,8 +2,10 @@ package config
 
 import (
 	"log"
+	"net/http"
 	"os"
 
+	"github.com/rs/cors"
 	"gopkg.in/yaml.v2"
 )
 
@@ -25,7 +27,7 @@ func NewConfig() *Config {
 	   @Return *Config - The Config object.
 	*/
 
-	config := Config{}
+	cfg := Config{}
 
 	// Read the YAML file
 	data, err := os.ReadFile("config.yaml")
@@ -34,7 +36,7 @@ func NewConfig() *Config {
 	}
 
 	// Decode the YAML data into the Config struct
-	err = yaml.Unmarshal(data, &config)
+	err = yaml.Unmarshal(data, &cfg)
 	if err != nil {
 		log.Fatal("Failed to decode YAML:", err)
 	}
@@ -46,8 +48,25 @@ func NewConfig() *Config {
 		log.Fatal("CLIENT_SECRET or CLIENT_ID environment variable not set")
 	}
 
-	config.Auth.ClientSecret = clientSecret
-	config.Auth.ClientID = clientID
+	cfg.Auth.ClientSecret = clientSecret
+	cfg.Auth.ClientID = clientID
 
-	return &config
+	return &cfg
+}
+
+func NewServer(cfg *Config, router http.Handler) *http.Server {
+	/* NewServer - Creates a new HTTP server.
+	   @Param config *Config - The configuration object.
+	   @Param router http.Handler - The router to use.
+	   @Return *http.Server - The HTTP server.
+	*/
+	cors := cors.New(cors.Options{
+		AllowedOrigins: cfg.CorsOrigins,
+		AllowedMethods: []string{"GET", "POST"},
+	})
+
+	return &http.Server{
+		Addr:    ":" + cfg.Port,
+		Handler: cors.Handler(router),
+	}
 }

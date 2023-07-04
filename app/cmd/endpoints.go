@@ -13,22 +13,22 @@ import (
 	"github.com/nachatz/my-ai-maker/app/internal/models"
 )
 
-func InitRoutes(config *config.Config) http.Handler {
+func InitRoutes(cfg *config.Config) http.Handler {
 	/* InitRoutes - Initializes the routes for the application.
-	   @Param *config.Config - The configuration object.
+	   @Param *cfg.Config - The configuration object.
 	   @Return http.Handler - The router.
 	*/
 	mux := chi.NewRouter()
 
 	// Non-authenticated endpoints
 	mux.Post(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) {
-		handlers.GenerateJWTHandler(w, r, config.Auth.ClientSecret, config.Auth.ClientID)
+		handlers.GenerateJWTHandler(w, r, cfg.Auth.ClientSecret, cfg.Auth.ClientID)
 	})
 
 	// Authenticated endpoints
 	mux.Group(func(r chi.Router) {
 		r.Use(func(next http.Handler) http.Handler {
-			return middleware.JwtMiddleware(next, config.Auth.ClientSecret)
+			return middleware.JwtMiddleware(next, cfg.Auth.ClientSecret)
 		})
 		r.Post(api.EndpointProcess, handlers.ProcessHandler)
 	})

@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"log"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/nachatz/my-ai-maker/app/internal/models"
 	"github.com/nachatz/my-ai-maker/app/internal/utils"
@@ -32,6 +34,7 @@ func GenerateJWTHandler(w http.ResponseWriter, r *http.Request, clientSecret str
 		response.Message = "Got em - Invalid client credentials!"
 		response.StatusCode = http.StatusUnauthorized
 	} else {
+		log.Println("**** Generating JWT...")
 		response = generateJwtResponse(r, clientSecret, clientId)
 	}
 
@@ -66,5 +69,6 @@ func generateJwtResponse(r *http.Request, clientSecret string, clientId string) 
 		response.StatusCode = http.StatusOK
 	}
 
+	log.Println("**** JWT generated")
 	return response
 }

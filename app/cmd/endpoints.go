@@ -1,39 +1,36 @@
-package handlers
+package main
 
 import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/go-chi/chi"
 	"github.com/nachatz/my-ai-maker/app/internal/api"
+	"github.com/nachatz/my-ai-maker/app/internal/config"
+	"github.com/nachatz/my-ai-maker/app/internal/handlers"
 	"github.com/nachatz/my-ai-maker/app/internal/middleware"
 	"github.com/nachatz/my-ai-maker/app/internal/models"
 )
 
-func InitRoutes() http.Handler {
+func InitRoutes(config *config.Config) http.Handler {
+	/* InitRoutes - Initializes the routes for the application.
+	   @Param *config.Config - The configuration object.
+	   @Return http.Handler - The router.
+	*/
 	mux := chi.NewRouter()
-
-	// load environment variables
-	clientSecret := os.Getenv("CLIENT_SECRET")
-	clientID := os.Getenv("CLIENT_ID")
-	if clientSecret == "" || clientID == "" {
-		log.Fatal("CLIENT_SECRET or CLIENT_ID environment variable not set")
-		return nil
-	}
 
 	// Non-authenticated endpoints
 	mux.Post(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) {
-		GenerateJWTHandler(w, r, clientSecret, clientID)
+		handlers.GenerateJWTHandler(w, r, config.Auth.ClientSecret, config.Auth.ClientID)
 	})
 
 	// Authenticated endpoints
 	mux.Group(func(r chi.Router) {
 		r.Use(func(next http.Handler) http.Handler {
-			return middleware.JwtMiddleware(next, clientSecret)
+			return middleware.JwtMiddleware(next, config.Auth.ClientSecret)
 		})
-		r.Post(api.EndpointProcess, ProcessHandler)
+		r.Post(api.EndpointProcess, handlers.ProcessHandler)
 	})
 
 	mux.MethodNotAllowed(methodNotAllowedHandler())
@@ -57,7 +54,6 @@ func logEndpointNames(router chi.Router) {
 		log.Fatal("Error walking the router:", err)
 	}
 }
-
 
 func methodNotAllowedHandler() http.HandlerFunc {
 	/* methodNotAllowedHandler - Handles the method not allowed error by returning an appropriate response.

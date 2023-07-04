@@ -5,23 +5,25 @@ import (
 	"net/http"
 
 	"github.com/joho/godotenv"
-	"github.com/nachatz/my-ai-maker/app/internal/handlers"
+	"github.com/nachatz/my-ai-maker/app/internal/config"
 )
 
 func main() {
 
-	// load in environment variables from .env file using os package
+	// Load in environment variables
 	err := godotenv.Load()
 	if err != nil {
-		// Handle the error if loading the .env file fails
 		log.Fatal("Error loading .env file")
-		return
 	}
 
-	// Initialize the router
-	router := handlers.InitRoutes()
+	// Initialize the config
+	config := config.NewConfig()
 
-	// Start the server on port 8080
-	log.Fatal(http.ListenAndServe(":8080", router))
+	// Initialize the router
+	router := InitRoutes(config)
+
+	// Start the server on the specified port
+	log.Println("Starting server on port " + config.Port)
+	log.Fatal(http.ListenAndServe(":"+config.Port, router))
 
 }

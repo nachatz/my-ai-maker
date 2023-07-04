@@ -5,7 +5,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/nachatz/my-ai-maker/app/models"
+	"github.com/nachatz/my-ai-maker/app/internal/models"
 )
 
 func WriteResponse(w http.ResponseWriter, result models.Response) {

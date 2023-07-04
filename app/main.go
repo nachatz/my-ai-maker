@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/joho/godotenv"
-	"github.com/nachatz/my-ai-maker/app/handlers"
+	"github.com/nachatz/my-ai-maker/app/internal/handlers"
 )
 
 func main() {

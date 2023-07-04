@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nachatz/my-ai-maker/app/models"
-	"github.com/nachatz/my-ai-maker/app/utils"
+	"github.com/nachatz/my-ai-maker/app/internal/models"
+	"github.com/nachatz/my-ai-maker/app/internal/utils"
 )
 
 func ProcessHandler(w http.ResponseWriter, r *http.Request) {

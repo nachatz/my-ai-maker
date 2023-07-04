@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"github.com/nachatz/my-ai-maker/app/models"
-	"github.com/nachatz/my-ai-maker/app/utils"
+	"github.com/nachatz/my-ai-maker/app/internal/models"
+	"github.com/nachatz/my-ai-maker/app/internal/utils"
 
 	"net/http"
 	"time"

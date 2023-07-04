@@ -7,9 +7,9 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/nachatz/my-ai-maker/app/api"
-	"github.com/nachatz/my-ai-maker/app/middleware"
-	"github.com/nachatz/my-ai-maker/app/models"
+	"github.com/nachatz/my-ai-maker/app/internal/api"
+	"github.com/nachatz/my-ai-maker/app/internal/middleware"
+	"github.com/nachatz/my-ai-maker/app/internal/models"
 )
 
 func InitializeRoutes() *mux.Router {

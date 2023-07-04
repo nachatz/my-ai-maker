@@ -12,7 +12,7 @@ init:
 	$(GOMOD) init github.com/nachatz/my-ai-maker/app
 
 build:
-	$(GOBUILD) -o $(BINARY_NAME)
+	cd ./cmd && $(GOBUILD) -o ../$(BINARY_NAME)
 
 run: tidy build
 	./$(BINARY_NAME)

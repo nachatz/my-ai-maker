@@ -91,14 +91,14 @@ export default function Profiles() {
           <div className="flex items-center justify-center space-x-4 h-full">
             <a
               href="/"
-              className="relative inline-block text-black"
+              className="relative inline-block text-black custom-link"
               aria-current="page"
             >
               Log in
             </a>
             <a
               href="/"
-              className="relative inline-block text-black"
+              className="relative inline-block text-black custom-link"
               aria-current="page"
             >
               Sign Up

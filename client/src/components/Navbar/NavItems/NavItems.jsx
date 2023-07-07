@@ -26,7 +26,8 @@ export default function NavItems({ navigation }) {
               href={item.href}
               className={classNames(
                 "relative inline-block",
-                item.current ? "text-black" : "text-gray-400"
+                item.current ? "text-black" : "text-gray-400",
+                "custom-link"
               )}
               aria-current={item.current ? "page" : undefined}
             >

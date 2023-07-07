@@ -3,6 +3,7 @@ import Features from "../../components/Features/Features";
 import Banner from "../../components/Banner/Banner";
 import Content from "./Content/Content";
 import Pricing from "../../components/Pricing/Pricing";
+import Footer from "../../components/Footer/Footer";
 
 import { features, content } from "./features";
 
@@ -14,6 +15,7 @@ export default function Home() {
         <Banner />
         <Features features={features} content={content}/>
         <Pricing />
+        <Footer />
       </div>
     </div>
   );

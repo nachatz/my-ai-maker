@@ -29,3 +29,11 @@
     width: 100%;
   }
   
+  .navbar {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+.scrolled {
+    opacity: 0.9;
+  }
+  

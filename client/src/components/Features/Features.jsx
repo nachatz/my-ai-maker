@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Features({ content, features }) {
   return (
-    <div className="py-24 sm:py-32 sm:mt-[10rem]">
+    <div className="py-24 sm:py-32 sm:mt-[10rem] rounded-md hover:shadow-md transition duration-500 ease-in-out">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-primary-600">

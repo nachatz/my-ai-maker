@@ -2,6 +2,7 @@ import React from "react";
 import Features from "../../components/Features/Features";
 import Banner from "../../components/Banner/Banner";
 import Content from "./Content/Content";
+import Pricing from "../../components/Pricing/Pricing";
 
 import { features, content } from "./features";
 
@@ -12,6 +13,7 @@ export default function Home() {
         <Content />
         <Banner />
         <Features features={features} content={content}/>
+        <Pricing />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import Features from "../../components/Features/Features";
 import Banner from "../../components/Banner/Banner";
 import Content from "./Content/Content";
 
-import { features } from "./features";
+import { features, content } from "./features";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <div className="mx-auto max-w-7xl px-8 lg:px-8">
         <Content />
         <Banner />
-        <Features features={features} />
+        <Features features={features} content={content}/>
       </div>
     </div>
   );

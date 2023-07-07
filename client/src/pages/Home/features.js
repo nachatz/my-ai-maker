@@ -5,6 +5,13 @@ import {
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
 
+export const content = {  
+  subtitle: "Optimize Immediately",
+  title: "Experience modern machine learning",
+  description:
+  "The space between the stars and galaxies is largely empty. We close the gap between your data and your model",
+};
+
 export const features = [
   {
     name: "Train Custom Models",
@@ -17,15 +24,15 @@ export const features = [
     icon: LockClosedIcon,
   },
   {
+    name: "Data Management",
+    description:
+      "Manage your data, and train your models with the data you want, how you want",
+    icon: FingerPrintIcon,
+  },
+  {
     name: "Expose your models",
     description:
       "Take your trained models, and expose them as a API for your applications",
     icon: ArrowPathIcon,
-  },
-  {
-    name: "Fine tune your models",
-    description:
-      "Disagree with our predictions? Fine tune your models with your own hyperparameters and see how it performs",
-    icon: FingerPrintIcon,
-  },
+  }
 ];

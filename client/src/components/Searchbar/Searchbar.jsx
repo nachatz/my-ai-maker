@@ -18,11 +18,11 @@ export default function Searchbar() {
         placeholder="Search..."
         value={searchTerm}
         onChange={handleInputChange}
-        className="px-3 py-1 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
+        className="px-3 py-0.3 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-0.5 focus:ring-gray-500"
       />
       <button
         onClick={handleSearch}
-        className="ml-2 px-3 py-1 bg-gray-700 text-white rounded-md hover:bg-gray-800"
+        className="ml-2 px-3 py-0.5 bg-gray-700 text-white rounded-md hover:bg-gray-600"
       >
         Search
       </button>

@@ -1,9 +1,10 @@
 import React from "react";
 
-function NotFound() {
+export default function NotFound() {
+  document.body.style.overflowY = "hidden";
   return (
     <>
-      <main className="grid min-h-full place-items-center px-6 py-10 sm:py-32 lg:px-8 animate-slide-in">
+      <main className="grid place-items-center px-6 py-10 sm:py-32 lg:px-8 animate-slide-in">
         <div className="text-center w-100">
           <p className="text-base font-semibold text-primary-600">404</p>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-text-900 sm:text-5xl">
@@ -25,5 +26,3 @@ function NotFound() {
     </>
   );
 }
-
-export default NotFound;

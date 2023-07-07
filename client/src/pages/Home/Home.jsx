@@ -3,9 +3,11 @@ import Features from "../../components/Features/Features";
 import Banner from "../../components/Banner/Banner";
 import Content from "./Content/Content";
 import Pricing from "../../components/Pricing/Pricing";
+import Sections from "../../components/Sections/Sections";
 import Footer from "../../components/Footer/Footer";
 
 import { features, content } from "./features";
+import { docContent, documents } from "./documents";
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
         <Banner />
         <Features features={features} content={content}/>
         <Pricing />
+        <Sections sections={documents} content={docContent}/>
         <Footer />
       </div>
     </div>

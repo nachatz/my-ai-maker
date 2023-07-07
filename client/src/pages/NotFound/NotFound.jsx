@@ -1,28 +1,28 @@
 import React from "react";
-import { useEffect, useState } from "react";
 
 function NotFound() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div
-        className={`bg-white shadow-lg rounded p-8 max-w-md transform transition-transform duration-500 ${
-          isMounted
-            ? "translate-x-0 opacity-100"
-            : "-translate-x-full opacity-0"
-        }`}
-      >
-        <h1 className="text-3xl font-bold mb-6 text-center">Page Not Found</h1>
-        <p className="text-lg text-center">
-          The page you're looking for does not exist.
-        </p>
-      </div>
-    </div>
+    <>
+      <main className="grid min-h-full place-items-center px-6 py-10 sm:py-32 lg:px-8 animate-slide-in">
+        <div className="text-center w-100">
+          <p className="text-base font-semibold text-indigo-600">404</p>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Page not found
+          </h1>
+          <p className="mt-6 text-base leading-7 text-gray-600">
+            This page doesn't exist yet, you're ahead of the curve.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="/"
+              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Go back home
+            </a>
+          </div>
+        </div>
+      </main>
+    </>
   );
 }
 

@@ -7,12 +7,14 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <Router>
-      <Navbar/>
-      <Routes>
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <div class="min-h-screen bg-slate-100">
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

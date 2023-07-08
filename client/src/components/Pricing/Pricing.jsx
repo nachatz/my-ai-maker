@@ -13,7 +13,7 @@ export default function Pricing() {
           <p className="mt-6 text-lg leading-8 text-gray-600">
             The application is currently in beta. Pricing is subject to change,
             but don't worry, we'll always notify you beforehand. For now, you
-            can use the application for freely.
+            can use the application for free
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
@@ -48,7 +48,7 @@ export default function Pricing() {
             <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
               <div className="mx-auto max-w-xs px-8">
                 <p className="text-base font-semibold text-gray-600">
-                  Start now, then scale
+                  Start simple, then scale
                 </p>
                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
                   <span className="text-5xl font-bold tracking-tight text-gray-900">
@@ -65,7 +65,7 @@ export default function Pricing() {
                   Register
                 </a>
                 <p className="mt-6 text-xs leading-5 text-gray-600">
-                  No credit card required and no news letter sign up. We'll only
+                  No credit card required and no newsletter sign up. We'll only
                   contact you on major changes.
                 </p>
               </div>

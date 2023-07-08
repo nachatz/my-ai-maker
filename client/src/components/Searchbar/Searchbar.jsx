@@ -15,7 +15,7 @@ export default function Searchbar() {
     <div className="flex items-center hidden lg:flex">
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search LearnAI posts..."
         value={searchTerm}
         onChange={handleInputChange}
         className="px-3 py-0.3 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-0.5 focus:ring-gray-500"

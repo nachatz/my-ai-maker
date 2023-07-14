@@ -1,6 +1,7 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { VariableIcon } from "@heroicons/react/24/outline";
+import Dropdown from "../Dropdown/Dropdown";
 import axios from "axios";
 
 export default function Modal({ open, setOpen }) {
@@ -14,25 +15,25 @@ export default function Modal({ open, setOpen }) {
   const handleTrainClick = () => {
     if (selectedFile) {
       const formData = new FormData();
-      formData.append('file', selectedFile);
-  
+      formData.append("file", selectedFile);
+
       axios
-        .post('http://localhost:8080/v1/process', formData, {
+        .post("http://localhost:8080/v1/process", formData, {
           headers: {
-            Authorization: 'Bearer ', // Replace <your_token> with your actual token
+            Authorization: "Bearer ", // Replace <your_token> with your actual token
           },
         })
         .then((response) => {
-          console.log('CSV file sent successfully.');
-          console.log('Response:', response.data); // Log the response to the console
+          console.log("CSV file sent successfully.");
+          console.log("Response:", response.data); // Log the response to the console
         })
         .catch((error) => {
-          console.error('Error sending CSV file:', error);
+          console.error("Error sending CSV file:", error);
         });
     }
     setOpen(false);
   };
-  
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -84,9 +85,18 @@ export default function Modal({ open, setOpen }) {
                         <p className="text-sm text-gray-500">
                           Upload your data in CSV format. Ensure you include a
                           label column. We'll handle the rest. If you have any
-                          questions, please refer to our documentation on
-                          preparing your data for training.
+                          questions, please refer to our{" "}
+                          <a
+                            href="/"
+                            className="text-primary-600 hover:text-primary-400"
+                          >
+                            documentation
+                          </a>{" "}
+                          on preparing your data for training.
                         </p>
+
+                        <Dropdown />
+
                         <label
                           htmlFor="fileInput"
                           className="mt-10 inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm cursor-pointer border border-gray-300 hover:bg-gray-50 focus:outline-none focus:border-primary-500 focus:ring-primary-500"

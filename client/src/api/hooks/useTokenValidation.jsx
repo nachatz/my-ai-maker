@@ -1,4 +1,4 @@
-import { auth, isTokenExpired } from "../connections";
+import { auth, isTokenExpired } from "../auth";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 

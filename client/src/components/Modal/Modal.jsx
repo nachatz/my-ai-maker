@@ -1,6 +1,7 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { VariableIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
 
 export default function Modal({ open, setOpen }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -12,11 +13,26 @@ export default function Modal({ open, setOpen }) {
 
   const handleTrainClick = () => {
     if (selectedFile) {
-      console.log("Selected file:", selectedFile);
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+  
+      axios
+        .post('http://localhost:8080/v1/process', formData, {
+          headers: {
+            Authorization: 'Bearer ', // Replace <your_token> with your actual token
+          },
+        })
+        .then((response) => {
+          console.log('CSV file sent successfully.');
+          console.log('Response:', response.data); // Log the response to the console
+        })
+        .catch((error) => {
+          console.error('Error sending CSV file:', error);
+        });
     }
-    setSelectedFile(null);
+    setOpen(false);
   };
-
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog

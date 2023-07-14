@@ -24,7 +24,7 @@ export const documents = [
     },
   },
   {
-    id: 1,
+    id: 2,
     title: "Singular Value Decomposition",
     href: "/",
     description:
@@ -41,7 +41,7 @@ export const documents = [
     },
   },
   {
-    id: 1,
+    id: 3,
     title: "Feed Forward Neural Networks",
     href: "/",
     description:

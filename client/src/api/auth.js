@@ -1,8 +1,4 @@
-import axios from "axios";
-
-const connection = axios.create({
-  baseURL: process.env.REACT_APP_TARGET,
-});
+import { connection } from "./connection";
 
 export async function auth() {
   const clientId = process.env.REACT_APP_CLIENT_ID;

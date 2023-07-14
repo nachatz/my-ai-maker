@@ -65,7 +65,7 @@ func generateJwtResponse(r *http.Request, clientSecret string, clientId string) 
 		response.Message = "Failed to generate JWT"
 		response.StatusCode = http.StatusInternalServerError
 	} else {
-		response.Message = "Successfully generated JWT: " + tokenString
+		response.Message = tokenString
 		response.StatusCode = http.StatusOK
 	}
 

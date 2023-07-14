@@ -61,8 +61,10 @@ func NewServer(cfg *Config, router http.Handler) *http.Server {
 	   @Return *http.Server - The HTTP server.
 	*/
 	cors := cors.New(cors.Options{
-		AllowedOrigins: cfg.CorsOrigins,
-		AllowedMethods: []string{"GET", "POST"},
+		AllowedOrigins:   cfg.CorsOrigins,
+		AllowedMethods:   []string{"GET", "POST"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
 	})
 
 	return &http.Server{

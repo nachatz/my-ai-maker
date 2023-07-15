@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Sections({ sections, content }) {
   return (
@@ -25,19 +26,19 @@ export default function Sections({ sections, content }) {
                 <time dateTime={section.datetime} className="text-gray-500">
                   {section.date}
                 </time>
-                <a
-                  href={section.category.href}
+                <Link
+                  to={section.category.to}
                   className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                 >
                   {section.category.title}
-                </a>
+                </Link>
               </div>
               <div className="group relative">
                 <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                  <a href={section.href}>
+                  <Link to={section.to}>
                     <span className="absolute inset-0" />
                     {section.title}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
                   {section.description}
@@ -51,10 +52,10 @@ export default function Sections({ sections, content }) {
                 />
                 <div className="text-sm leading-6">
                   <p className="font-semibold text-gray-900">
-                    <a href={section.author.href}>
+                    <Link to={section.author.to}>
                       <span className="absolute inset-0" />
                       {section.author.name}
-                    </a>
+                    </Link>
                   </p>
                   <p className="text-gray-600">{section.author.role}</p>
                 </div>

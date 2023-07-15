@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
@@ -29,12 +30,12 @@ export default function Banner() {
             Register an account and cache your models for free. You'll be able
             to navigate here to see predictions and productionalize your models
           </p>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="flex-none rounded-full bg-primary-800 px-3.5 py-1 text-sm font-semibold text-white shadow-md hover:bg-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-900"
           >
             Register <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

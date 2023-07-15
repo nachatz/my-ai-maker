@@ -1,6 +1,6 @@
 import React from "react";
 import { classNames } from "../../../lib/utils/utils";
-
+import { Link } from "react-router-dom";
 import "../Navbar.css";
 
 export default function NavItems({ navigation }) {
@@ -21,9 +21,9 @@ export default function NavItems({ navigation }) {
       <div className="hidden sm:ml-6 sm:block">
         <div className="flex items-center justify-center space-x-4 h-full">
           {navigation.map((item) => (
-            <a
+            <Link
+              to={item.href}
               key={item.name}
-              href={item.href}
               className={classNames(
                 "relative inline-block",
                 item.current ? "text-black" : "text-gray-400",
@@ -32,7 +32,7 @@ export default function NavItems({ navigation }) {
               aria-current={item.current ? "page" : undefined}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -3,10 +3,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { VariableIcon } from "@heroicons/react/24/outline";
 import Dropdown from "../Dropdown/Dropdown";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Modal({ open, setOpen }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const cancelButtonRef = useRef(null);
+  const token = useSelector((state) => state.auth.token);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -20,12 +23,12 @@ export default function Modal({ open, setOpen }) {
       axios
         .post("http://localhost:8080/v1/process", formData, {
           headers: {
-            Authorization: "Bearer ", // Replace <your_token> with your actual token
+            Authorization: "Bearer " + token, 
           },
         })
         .then((response) => {
           console.log("CSV file sent successfully.");
-          console.log("Response:", response.data); // Log the response to the console
+          console.log("Response:", response.data);
         })
         .catch((error) => {
           console.error("Error sending CSV file:", error);
@@ -86,12 +89,12 @@ export default function Modal({ open, setOpen }) {
                           Upload your data in CSV format. Ensure you include a
                           label column. We'll handle the rest. If you have any
                           questions, please refer to our{" "}
-                          <a
-                            href="/"
+                          <Link
+                            to="/"
                             className="text-primary-600 hover:text-primary-400"
                           >
                             documentation
-                          </a>{" "}
+                          </Link>{" "}
                           on preparing your data for training.
                         </p>
 

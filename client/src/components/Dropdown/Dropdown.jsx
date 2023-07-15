@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { classNames } from "../../lib/utils/utils";
+import { Link } from "react-router-dom";
 
 const options = [
   { name: "Logistic Regression", href: "/logistic-regression" },
@@ -35,15 +36,15 @@ export default function Dropdown() {
             {options.map((option) => (
               <Menu.Item key={option.name}>
                 {({ active }) => (
-                  <a
-                    href={option.href}
+                  <Link
+                    to={option.href}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block px-4 py-2 text-sm"
                     )}
                   >
                     {option.name}
-                  </a>
+                  </Link>
                 )}
               </Menu.Item>
             ))}

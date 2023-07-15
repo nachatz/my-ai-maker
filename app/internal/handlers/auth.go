@@ -56,7 +56,7 @@ func generateJwtResponse(r *http.Request, clientSecret string, clientId string) 
 
 	// Set the claims (payload) of the token
 	claims := token.Claims.(jwt.MapClaims)
-	claims["exp"] = time.Now().Add(time.Minute * 45).Unix()
+	claims["exp"] = time.Now().Add(time.Minute * 1).Unix()
 	claims["clientId"] = clientId
 
 	// Generate the signed token string using the client secret

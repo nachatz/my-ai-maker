@@ -2,6 +2,7 @@ import React from "react";
 import Searchbar from "../Searchbar/Searchbar";
 import Profiles from "./Profiles/Profiles";
 import NavItems from "./NavItems/NavItems";
+import Loading from "../Loading/Loading";
 
 import { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
@@ -9,11 +10,13 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { classNames } from "../../lib/utils/utils";
 import { navigation } from "./nav-options";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./Navbar.css";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const { isLoading } = useAuth0();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,11 +51,16 @@ export default function Navbar() {
               </div>
               {/* Handle desktop nav */}
               <NavItems navigation={navigation} />
-              <Searchbar />
-              <Profiles />
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <>
+                  <Searchbar />
+                  <Profiles />
+                </>
+              )}
             </div>
           </div>
-
           {/* Handle mobile nav */}
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">

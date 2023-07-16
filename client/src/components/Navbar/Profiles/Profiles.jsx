@@ -1,19 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { BellIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { classNames } from "../../../lib/utils/utils";
 import { Link } from "react-router-dom";
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 import "../Navbar.css";
 
 export default function Profiles() {
-  const user = useSelector((state) => state.auth.user);
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   return (
     <>
-      {user ? (
+      {isAuthenticated ? (
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <button
             type="button"
@@ -27,11 +28,19 @@ export default function Profiles() {
             <div>
               <Menu.Button className="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span className="sr-only">Open user menu</span>
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src="https://img.icons8.com/?size=512&id=6644&format=png"
-                  alt=""
-                />
+                {user?.picture ? (
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src={user.picture}
+                    alt={user?.name}
+                  />
+                ) : (
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src="https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-1810626-1536314.png?f=avif&w=256"
+                    alt={user?.name}
+                  />
+                )}
               </Menu.Button>
             </div>
             <Transition
@@ -72,15 +81,17 @@ export default function Profiles() {
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link
-                      to="/"
+                    <button
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
                       )}
+                      onClick={() =>
+                        logout({ returnTo: window.location.origin })
+                      }
                     >
                       Sign out
-                    </Link>
+                    </button>
                   )}
                 </Menu.Item>
               </Menu.Items>
@@ -90,20 +101,21 @@ export default function Profiles() {
       ) : (
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div className="flex items-center justify-center space-x-4 h-full">
-            <Link
-              to="/"
+            <a
               className="relative inline-block text-black custom-link"
               aria-current="page"
+              href="/"
             >
-              Log in
-            </Link>
-            <Link
+              <button onClick={() => loginWithRedirect()}>Log in</button>
+            </a>
+            <button
               to="/"
               className="relative inline-block text-black custom-link"
               aria-current="page"
+              onClick={() => loginWithRedirect()}
             >
               Sign Up
-            </Link>
+            </button>
           </div>
         </div>
       )}

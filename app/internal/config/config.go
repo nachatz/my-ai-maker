@@ -16,6 +16,8 @@ type Config struct {
 	*/
 	Port        string   `yaml:"port"`
 	CorsOrigins []string `yaml:"cors_origins"`
+	IssuerUrl   string   `yaml:"issuer_url"`
+	Audience    string   `yaml:"audience"`
 	Auth        struct {
 		ClientID     string `yaml:"client_id"`
 		ClientSecret string `yaml:"client_secret"`
@@ -44,12 +46,16 @@ func NewConfig() *Config {
 	// load environment variables
 	clientSecret := os.Getenv("CLIENT_SECRET")
 	clientID := os.Getenv("CLIENT_ID")
-	if clientSecret == "" || clientID == "" {
-		log.Fatal("CLIENT_SECRET or CLIENT_ID environment variable not set")
+	issuerUrl := os.Getenv("ISSUER_URL")
+	audience := os.Getenv("AUDIENCE")
+	if clientSecret == "" || clientID == "" || issuerUrl == "" || audience == "" {
+		log.Fatal("Environment variable not set")
 	}
 
 	cfg.Auth.ClientSecret = clientSecret
 	cfg.Auth.ClientID = clientID
+	cfg.IssuerUrl = issuerUrl
+	cfg.Audience = audience
 
 	return &cfg
 }

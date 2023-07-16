@@ -3,13 +3,77 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
+	"net/url"
 	"strings"
+	"time"
 
+	"github.com/auth0/go-jwt-middleware/v2/jwks"
+	"github.com/auth0/go-jwt-middleware/v2/validator"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/nachatz/my-ai-maker/app/internal/config"
 )
 
-func JwtMiddleware(next http.Handler, clientSecret string) http.Handler {
+func JwtMiddleware(next http.Handler, cfg *config.Config) http.Handler {
+	/* JwtMiddleware - Middleware function for JWT authentication.
+	   @Param next - The next http.Handler in the chain.
+	   @Param config - configuration for the middleware.
+	   @Return http.Handler - The middleware handler.
+	*/
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		issuerURL := cfg.IssuerUrl
+		parsedIssuerURL, err := url.Parse(issuerURL)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		provider := jwks.NewCachingProvider(parsedIssuerURL, 5*time.Minute)
+
+		jwtValidator, err := validator.New(
+			provider.KeyFunc,
+			validator.RS256,
+			issuerURL,
+			[]string{cfg.Audience}, // the api audience!!!
+		)
+
+		if err != nil {
+			log.Fatalf("Failed to set up the jwt validator")
+		}
+
+		// Get the token from the request header
+		authHeader := r.Header.Get("Authorization")
+		authHeaderParts := strings.Split(authHeader, " ")
+
+		if len(authHeaderParts) != 2 {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+
+		// Validate the token
+		tokenInfo, err := jwtValidator.ValidateToken(r.Context(), authHeaderParts[1])
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
+
+		validatedClaims, ok := tokenInfo.(*validator.ValidatedClaims)
+		if !ok {
+			fmt.Println("Unable to extract validated claims")
+			return
+		}
+
+		// Create a new context with the subject information
+		ctx := context.WithValue(r.Context(), "subject", validatedClaims.RegisteredClaims.Subject)
+
+		// Call the next handler with the updated context
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+func DeprecatedJwtMiddleware(next http.Handler, clientSecret string) http.Handler {
 	/* JwtMiddleware - Middleware function for JWT authentication.
 	   @Param next - The next http.Handler in the chain.
 	   @Param clientSecret - The client secret key used for token verification.

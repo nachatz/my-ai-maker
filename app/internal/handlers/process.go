@@ -25,6 +25,10 @@ func processCsvResponse(r *http.Request) models.Response {
 	*/
 
 	var response models.Response
+	subject := r.Context().Value("subject").(string)
+
+	// print out subject
+	log.Printf("User Subject: %v", subject)
 
 	file, _, err := r.FormFile("file")
 	if err != nil {

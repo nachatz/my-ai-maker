@@ -1,4 +1,4 @@
-import { connection } from "./connection";
+import { connection } from "../connection";
 
 export async function auth() {
   const clientId = process.env.REACT_APP_CLIENT_ID;

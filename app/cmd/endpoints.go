@@ -28,7 +28,7 @@ func InitRoutes(cfg *config.Config) http.Handler {
 	// Authenticated endpoints
 	mux.Group(func(r chi.Router) {
 		r.Use(func(next http.Handler) http.Handler {
-			return middleware.JwtMiddleware(next, cfg.Auth.ClientSecret)
+			return middleware.JwtMiddleware(next, cfg)
 		})
 		r.Post(api.EndpointProcess, handlers.ProcessHandler)
 	})

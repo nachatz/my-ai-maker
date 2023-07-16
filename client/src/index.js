@@ -23,7 +23,7 @@ root.render(
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: audience,
-        scope: "openid",
+        scope: "openid profile",
       }}
     >
       <Provider store={store}>

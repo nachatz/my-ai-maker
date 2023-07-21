@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	"golang.org/x/time/rate"
+
 	"github.com/go-chi/chi"
 	"github.com/nachatz/my-ai-maker/app/internal/api"
 	"github.com/nachatz/my-ai-maker/app/internal/config"
@@ -19,6 +21,10 @@ func InitRoutes(cfg *config.Config) http.Handler {
 	   @Return http.Handler - The router.
 	*/
 	mux := chi.NewRouter()
+	var limiter = rate.NewLimiter(rate.Limit(5), 10)
+
+	// Rate limit all endpoints
+	mux.Use(middleware.RateLimitMiddleware(limiter))
 
 	// Non-authenticated endpoints
 	mux.Post(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) {

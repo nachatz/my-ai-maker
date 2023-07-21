@@ -30,14 +30,7 @@ func InitRoutes(cfg *config.Config) http.Handler {
 	mux.Post(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) {
 		handlers.GenerateJWTHandler(w, r, cfg.Auth.ClientSecret, cfg.Auth.ClientID)
 	})
-
-	// Authenticated endpoints
-	mux.Group(func(r chi.Router) {
-		r.Use(func(next http.Handler) http.Handler {
-			return middleware.JwtMiddleware(next, cfg)
-		})
-		r.Post(api.EndpointProcess, handlers.ProcessHandler)
-	})
+	mux.Post(api.EndpointProcess, handlers.ProcessHandler)
 
 	mux.MethodNotAllowed(methodNotAllowedHandler())
 

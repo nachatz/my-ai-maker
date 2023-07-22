@@ -16,7 +16,10 @@ export default function LandingModal({
             Upload your data in CSV format. Ensure you include a label column.
             We'll handle the rest. If you have any questions, please refer to
             our{" "}
-            <Link to="/" className="text-primary-600 hover:text-primary-400">
+            <Link
+              to="/docs"
+              className="text-primary-600 hover:text-primary-400"
+            >
               documentation
             </Link>{" "}
             on preparing your data for training.

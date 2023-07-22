@@ -1,13 +1,14 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { VariableIcon } from "@heroicons/react/24/outline";
-import Dropdown from "../Dropdown/Dropdown";
-import axios from "axios";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { clearState } from "../../lib/utils/utils";
+import LandingModal from "./LandingModal/LandingModal";
+import axios from "axios";
 
 export default function Modal({ open, setOpen }) {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [response, setResponse] = useState(null);
   const cancelButtonRef = useRef(null);
   const token = useSelector((state) => state.auth.token);
 
@@ -18,23 +19,22 @@ export default function Modal({ open, setOpen }) {
   const handleTrainClick = () => {
     if (selectedFile) {
       const formData = new FormData();
+      setResponse("loading");
       formData.append("file", selectedFile);
 
       axios
         .post("http://localhost:8080/v1/process", formData, {
           headers: {
-            Authorization: "Bearer " + token, 
+            Authorization: "Bearer " + token,
           },
         })
-        .then((response) => {
-          console.log("CSV file sent successfully.");
-          console.log("Response:", response.data);
+        .then((resp) => {
+          setResponse(resp.data["message"]);
         })
         .catch((error) => {
-          console.error("Error sending CSV file:", error);
+          setResponse(error["message"]);
         });
     }
-    setOpen(false);
   };
 
   return (
@@ -85,38 +85,11 @@ export default function Modal({ open, setOpen }) {
                         Train Model
                       </Dialog.Title>
                       <div className="mt-5 flex justify-center flex-col">
-                        <p className="text-sm text-gray-500">
-                          Upload your data in CSV format. Ensure you include a
-                          label column. We'll handle the rest. If you have any
-                          questions, please refer to our{" "}
-                          <Link
-                            to="/"
-                            className="text-primary-600 hover:text-primary-400"
-                          >
-                            documentation
-                          </Link>{" "}
-                          on preparing your data for training.
-                        </p>
-
-                        <Dropdown />
-
-                        <label
-                          htmlFor="fileInput"
-                          className="mt-10 inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm cursor-pointer border border-gray-300 hover:bg-gray-50 focus:outline-none focus:border-primary-500 focus:ring-primary-500"
-                        >
-                          {selectedFile ? (
-                            <span>{selectedFile.name}</span>
-                          ) : (
-                            <span>Upload CSV</span>
-                          )}
-                          <input
-                            id="fileInput"
-                            type="file"
-                            accept=".csv"
-                            className="sr-only"
-                            onChange={handleFileChange}
-                          />
-                        </label>
+                        <LandingModal
+                          response={response}
+                          handleFileChange={handleFileChange}
+                          selectedFile={selectedFile}
+                        />
                       </div>
                     </div>
                   </div>
@@ -127,15 +100,18 @@ export default function Modal({ open, setOpen }) {
                     className="inline-flex w-full justify-center rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 sm:ml-3 sm:w-auto"
                     onClick={handleTrainClick}
                   >
-                    Train
+                    {response === null ? "Submit" : "Predict"}
                   </button>
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      clearState([setSelectedFile, setResponse]);
+                      setOpen(false);
+                    }}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    Close
                   </button>
                 </div>
               </Dialog.Panel>

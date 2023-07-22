@@ -52,7 +52,7 @@ export default function Navbar() {
               {/* Handle desktop nav */}
               <NavItems navigation={navigation} />
               {isLoading ? (
-                <Loading />
+                <Loading auth={true} />
               ) : (
                 <>
                   <Searchbar />

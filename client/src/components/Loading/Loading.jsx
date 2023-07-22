@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Loading() {
+export default function Loading({ auth }) {
   return (
     <>
-      <p className="mr-5">Authenticating...</p>
+      {auth && <p className="mr-5">Authenticating...</p>}
       <div role="status">
         <svg
           aria-hidden="true"

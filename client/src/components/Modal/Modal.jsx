@@ -1,39 +1,30 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { VariableIcon } from "@heroicons/react/24/outline";
-import { useSelector } from "react-redux";
 import { clearState } from "../../lib/utils/utils";
 import LandingModal from "./LandingModal/LandingModal";
-import axios from "axios";
+import { postCsv } from "../../api/process";
 
 export default function Modal({ open, setOpen }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [response, setResponse] = useState(null);
   const cancelButtonRef = useRef(null);
-  const token = useSelector((state) => state.auth.token);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleTrainClick = () => {
+  const handleTrainClick = async () => {
     if (selectedFile) {
       const formData = new FormData();
-      setResponse("loading");
       formData.append("file", selectedFile);
-
-      axios
-        .post("http://localhost:8080/v1/process", formData, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((resp) => {
-          setResponse(resp.data["message"]);
-        })
-        .catch((error) => {
-          setResponse(error["message"]);
-        });
+      setResponse("loading");
+      try {
+        const apiResponse = await postCsv(formData);
+        setResponse(apiResponse);
+      } catch (error) {
+        setResponse("500 - Error making the request");
+      }
     }
   };
 

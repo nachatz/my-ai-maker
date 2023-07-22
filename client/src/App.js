@@ -7,11 +7,13 @@ import NotFound from "./pages/NotFound/NotFound";
 import Navbar from "./components/Navbar/Navbar";
 import Documentation from "./pages/Documentation/Documentation";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/functional/ScrollToTop/ScrollToTop";
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-50 ">
       <Router>
+        <ScrollToTop />
         <Navbar />
         <div className="py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-8 lg:px-8">

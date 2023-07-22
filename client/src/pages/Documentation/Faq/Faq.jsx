@@ -36,29 +36,29 @@ const faqItems = [
 export default function Faq() {
   return (
     <section>
-      <div class="items-center w-full px-5 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
+      <div className="items-center w-full px-5 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
         <div>
-          <div class="max-w-2xl">
+          <div className="max-w-2xl">
             <p className="text-base font-semibold leading-7 text-indigo-600">
               Questions answered
             </p>
-            <p class="mt-2 text-3xl font-bold tracking-tight">
+            <p className="mt-2 text-3xl font-bold tracking-tight">
               Frequent questions
             </p>
           </div>
         </div>
-        <div class="w-full mx-auto mt-12 text-left">
-          <div class="relative items-center gap-12 m-auto lg:inline-flex md:order-first">
-            <div class="p-4 mx-auto lg:max-w-7xl lg:p-0">
-              <ul class="grid grid-cols-2 gap-4 list-none lg:grid-cols-3 lg:gap-12">
+        <div className="w-full mx-auto mt-12 text-left">
+          <div className="relative items-center gap-12 m-auto lg:inline-flex md:order-first">
+            <div className="p-4 mx-auto lg:max-w-7xl lg:p-0">
+              <ul className="grid grid-cols-2 gap-4 list-none lg:grid-cols-3 lg:gap-12">
                 {faqItems.map((item, index) => (
                   <li key={index}>
                     <div>
-                      <p class="mt-5 text-lg font-medium leading-6 text-black">
+                      <p className="mt-5 text-lg font-medium leading-6 text-black">
                         {item.question}
                       </p>
                     </div>
-                    <div class="mt-2 text-base text-gray-500">
+                    <div className="mt-2 text-base text-gray-500">
                       {item.answer}
                     </div>
                   </li>

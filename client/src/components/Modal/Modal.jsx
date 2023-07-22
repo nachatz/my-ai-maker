@@ -34,7 +34,10 @@ export default function Modal({ open, setOpen }) {
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          clearState([setSelectedFile, setResponse]);
+          setOpen(false);
+        }}
       >
         <Transition.Child
           as={Fragment}

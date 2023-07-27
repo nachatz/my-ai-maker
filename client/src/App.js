@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Documentation from "./pages/Documentation/Documentation";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/functional/ScrollToTop/ScrollToTop";
+import Validation from "./pages/Validation/Validation";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/docs" element={<Documentation />} />
+              <Route path="/validation" element={<Validation />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
             <Footer />

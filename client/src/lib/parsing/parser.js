@@ -40,5 +40,5 @@ const parseCSV = (file) => {
 };
 
 const getHeaderTypes = (data) => {
-  return data[1].map((item) => typeof item);
+  return data[1].map((item) => [typeof item, "ordinal"]);
 };

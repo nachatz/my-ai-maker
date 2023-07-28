@@ -7,13 +7,10 @@ export default function LoadingOverlay({ active }) {
 
   useEffect(() => {
     if (active) {
-      document.body.style.overflow = "hidden";
-
       timeoutRef.current = setTimeout(() => {
         navigate("/");
       }, 5000);
     } else {
-      document.body.style.overflow = "auto";
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }

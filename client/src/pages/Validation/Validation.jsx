@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useValidationData } from "../../hooks/useValidationData";
-import Loading from "../../components/Loading/Loading";
+import LoadingOverlay from "../../components/LoadingOverlay/LoadingOverylay";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 export default function Validation() {
@@ -60,7 +60,7 @@ export default function Validation() {
                   </div>
                 ))
               ) : (
-                <Loading/>
+                <LoadingOverlay active={dataInfo.length === 0} />
               )}
             </div>
           </div>

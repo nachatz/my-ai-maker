@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import {
@@ -7,20 +7,6 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 
-const encodings = [
-  {
-    name: "Ordinal",
-    description: "Transform your data 1-n based on unique values",
-    icon: HashtagIcon,
-    selected: true,
-  },
-  {
-    name: "No transformation",
-    description: "Leave your data formatted as is, this may not validate",
-    icon: DocumentIcon,
-    selected: false,
-  },
-];
 const routes = [
   {
     name: "Documentation",
@@ -30,7 +16,42 @@ const routes = [
   },
 ];
 
-export default function Flyout() {
+export default function Flyout({ feature, metadata, setMetadata }) {
+  const encodingVals = [
+    {
+      name: "Ordinal",
+      diplay: "ordinal",
+      description: "Transform your data 1-n based on unique values",
+      icon: HashtagIcon,
+      selected: true,
+    },
+    {
+      name: "None",
+      display: "none",
+      description: "Leave your data formatted as is, this may not validate",
+      icon: DocumentIcon,
+      selected: false,
+    },
+  ];
+
+  const [encodings, setEncodings] = useState(encodingVals);
+  const handleClick = (e) => {
+    const updatedEncodings = encodings.map((item) => ({
+      ...item,
+      selected: item.name === e.name,
+    }));
+
+    setEncodings(updatedEncodings);
+
+    setMetadata((prevMetadata) =>
+      prevMetadata.map((item) =>
+        item.feature === feature
+          ? { ...item, type: [item.type[0], e.name] }
+          : item
+      )
+    );
+  };
+
   return (
     <Popover className="relative">
       <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
@@ -53,6 +74,7 @@ export default function Flyout() {
               {encodings.map((item) => (
                 <div
                   key={item.name}
+                  onClick={() => handleClick(item)}
                   className={`group relative flex gap-x-6 rounded-lg p-4 cursor-pointer ${
                     item.selected
                       ? "bg-primary-50 text-white"

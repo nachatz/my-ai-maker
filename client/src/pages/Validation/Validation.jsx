@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useValidationData } from "../../hooks/useValidationData";
 import Flyout from "../../components/Flyout/Flyout";
@@ -17,10 +17,14 @@ function CustomButton() {
 
 export default function Validation() {
   const location = useLocation();
+  const [metadata, setMetadata] = useState([]);
   const file = location?.state?.file ?? null;
 
-  // data is also returned
+  // There's also raw data in this return
   const { dataInfo } = useValidationData(file);
+  useEffect(() => {
+    setMetadata(dataInfo);
+  }, [dataInfo]);
 
   const hoverStyles = {
     transitionDuration: "0.2s",
@@ -52,8 +56,8 @@ export default function Validation() {
         <div className="flex justify-center max-w-xl py-12 mx-auto text-left lg:max-w-7xl">
           <div className="flex justify-center">
             <div className="grid grid-cols-3 gap-12 text-center lg:grid-cols-5 lg:space-y-0">
-              {dataInfo.length > 0 ? (
-                dataInfo.map((item) => (
+              {metadata.length > 0 ? (
+                metadata.map((item) => (
                   <div key={item.feature}>
                     <div>
                       <div
@@ -67,7 +71,11 @@ export default function Validation() {
                       <p className="mt-4 text-lg font-medium leading-6 text-black">
                         {item.feature} ({item.type[1]})
                       </p>
-                      <Flyout />
+                      <Flyout
+                        feature={item.feature}
+                        metadata={metadata}
+                        setMetadata={setMetadata}
+                      />
                     </div>
                   </div>
                 ))

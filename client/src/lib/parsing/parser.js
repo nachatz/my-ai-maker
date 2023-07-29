@@ -26,8 +26,11 @@ const parseCSV = (file) => {
 
     reader.onload = (e) => {
       const content = e.target.result;
-      const lines = content.split("\n");
-      const data = lines.map((line) => line.split(","));
+      const cleanedContent = content.replace(/\r/g, "");
+      const lines = cleanedContent.split("\n");
+      const data = lines.map((line) =>
+        line.split(",").map((value) => value.trim())
+      );
       resolve(data);
     };
 

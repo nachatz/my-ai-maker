@@ -16,7 +16,7 @@ const routes = [
   },
 ];
 
-export default function Flyout({ feature, metadata, setMetadata }) {
+export default function Flyout({ feature, metadata, setMetadata, type }) {
   const encodingVals = [
     {
       name: "Ordinal",
@@ -28,7 +28,7 @@ export default function Flyout({ feature, metadata, setMetadata }) {
     {
       name: "None",
       display: "none",
-      description: "Leave your data formatted as is, this may not validate",
+      description: "Don't transform this feature at all for simplicity",
       icon: DocumentIcon,
       selected: false,
     },
@@ -55,7 +55,7 @@ export default function Flyout({ feature, metadata, setMetadata }) {
   return (
     <Popover className="relative">
       <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-        <span>Transformations</span>
+        <span className="text-xs ml-2">{type.toUpperCase()}</span>
         <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
       </Popover.Button>
 

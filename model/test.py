@@ -1,14 +1,18 @@
 import torch
+import torch.nn as nn
+import torch.utils.data as data
 
 
-def test_model(model, dataloader, criterion):
+def test_model(
+    model: nn.Module, dataloader: data.DataLoader, criterion: nn.Module
+) -> None:
     """
     Evaluate a PyTorch model using the provided data and criterion.
 
     Parameters:
         model (torch.nn.Module): The PyTorch model to be evaluated.
         dataloader (torch.utils.data.DataLoader): The DataLoader containing the test data.
-        criterion: The loss function used for evaluating the model.
+        criterion (torch.nn.Module): The loss function used for evaluating the model.
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)

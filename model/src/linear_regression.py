@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 
 
 class LinearRegression(nn.Module):
@@ -19,11 +20,11 @@ class LinearRegression(nn.Module):
         The `forward` method defines the forward pass of the model.
     """
 
-    def __init__(self, input_size, output_size):
+    def __init__(self, input_size: int, output_size: int) -> None:
         super(LinearRegression, self).__init__()
-        self.linear = nn.Linear(input_size, output_size)
+        self.linear: nn.Linear = nn.Linear(input_size, output_size)
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Define the forward pass of the model.
 

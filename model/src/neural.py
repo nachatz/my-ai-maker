@@ -1,7 +1,8 @@
 import torch
+import torch.nn as nn
 
 
-class Feedforward(torch.nn.Module):
+class Feedforward(nn.Module):
     """
     Feedforward Neural Network model with configurable number of hidden layers and activation function.
 
@@ -22,7 +23,13 @@ class Feedforward(torch.nn.Module):
         activation_func (torch.nn.Module): The activation function to be used.
     """
 
-    def __init__(self, input_size, output_size, num_layers=1, activation="sigmoid"):
+    def __init__(
+        self,
+        input_size: int,
+        output_size: int,
+        num_layers: int = 1,
+        activation: str = "sigmoid",
+    ) -> None:
         super(Feedforward, self).__init__()
         self.input_size = input_size
         self.output_size = output_size
@@ -41,13 +48,13 @@ class Feedforward(torch.nn.Module):
             )
 
         self.activation_func = activation_functions[activation]
-        self.hidden_layers = torch.nn.ModuleList()
+        self.hidden_layers: nn.ModuleList[nn.Linear] = nn.ModuleList()
         for _ in range(num_layers):
             self.hidden_layers.append(
-                torch.nn.Linear(self.input_size, self.output_size, bias=False)
+                nn.Linear(self.input_size, self.output_size, bias=False)
             )
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Define the forward pass of the network.
 

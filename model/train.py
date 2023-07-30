@@ -1,20 +1,29 @@
 import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.utils.data as data
 
 
 # Stochastic
-def train_model(model, dataloader, criterion, optimizer, num_epochs):
+def train_model(
+    model: nn.Module,
+    dataloader: data.DataLoader,
+    criterion: nn.Module,
+    optimizer: optim.Optimizer,
+    num_epochs: int,
+) -> dict:
     """
     Train a PyTorch model using the provided data and hyperparameters.
 
     Parameters:
         model (torch.nn.Module): The PyTorch model to be trained.
         dataloader (torch.utils.data.DataLoader): The DataLoader containing the training data.
-        criterion: The loss function used for training the model.
-        optimizer: The optimization algorithm for updating model parameters.
+        criterion (torch.nn.Module): The loss function used for training the model.
+        optimizer (torch.optim.Optimizer): The optimization algorithm for updating model parameters.
         num_epochs (int): The number of epochs to train the model.
 
     Returns:
-        state_dict (dict): The final state of the trained model's parameters.
+        dict: The final state of the trained model's parameters.
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)

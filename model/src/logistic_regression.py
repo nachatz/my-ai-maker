@@ -18,13 +18,13 @@ class LogisticRegression(torch.nn.Module):
         sigmoid (torch.nn.Sigmoid): The sigmoid activation function.
     """
 
-    def __init__(self, input_size):
+    def __init__(self, input_size: int):
         super(LogisticRegression, self).__init__()
-        self.input_size = input_size
-        self.linear = torch.nn.Linear(self.input_size, 1)
-        self.sigmoid = torch.nn.Sigmoid()
+        self.input_size: int = input_size
+        self.linear: torch.nn.Linear = torch.nn.Linear(self.input_size, 1)
+        self.sigmoid: torch.nn.Sigmoid = torch.nn.Sigmoid()
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Define the forward pass of the model.
 
@@ -34,6 +34,6 @@ class LogisticRegression(torch.nn.Module):
         Returns:
             torch.Tensor: The output tensor after passing through the model.
         """
-        preactivation = self.linear(x)
-        output = self.sigmoid(preactivation)
+        preactivation: torch.Tensor = self.linear(x)
+        output: torch.Tensor = self.sigmoid(preactivation)
         return output

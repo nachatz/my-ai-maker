@@ -1,7 +1,7 @@
 import torch
 
 
-def init_weights(m):
+def init_weights(m: torch.nn.Module) -> None:
     """
     Initialize the weights of linear layers with ones.
 

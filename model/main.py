@@ -16,7 +16,7 @@ def preprocess_data(csv_file):
     return df
 
 @app.route('/upload', methods=['POST'])
-def upload_csv():
+def upload():
     if 'file' not in request.files:
         res = Response("No file found", 400)
     else:

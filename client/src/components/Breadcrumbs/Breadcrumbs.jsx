@@ -7,10 +7,9 @@ export default function Breadcrumbs() {
         <div className="justify-center w-full mx-auto">
           <nav aria-label="Progress">
             <ol
-              role="list"
               className="flex items-center justify-center mx-auto "
             >
-              <li className="mr-5 font-bold">Validation</li>
+              <li className="mr-5 font-bold">Encodings</li>
               <li className="relative pr-8 sm:pr-20">
                 <div
                   className="absolute inset-0 flex items-center"
@@ -19,7 +18,7 @@ export default function Breadcrumbs() {
                   <div className="h-0.5 w-full bg-black"></div>
                 </div>
                 <a
-                  href="#"
+                  href="/"
                   className="relative flex items-center justify-center w-8 h-8 bg-black rounded-full hover:bg-blue-900"
                 >
                   <span className="sr-only">Step 2</span>
@@ -33,7 +32,7 @@ export default function Breadcrumbs() {
                   <div className="h-0.5 w-full bg-gray-200"></div>
                 </div>
                 <a
-                  href="#"
+                  href="/"
                   className="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-black rounded-full"
                   aria-current="step"
                 >
@@ -52,7 +51,7 @@ export default function Breadcrumbs() {
                   <div className="h-0.5 w-full bg-gray-200"></div>
                 </div>
                 <a
-                  href="#"
+                  href="/"
                   className="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-gray-300 rounded-full group hover:border-gray-400"
                 >
                   <span
@@ -70,7 +69,7 @@ export default function Breadcrumbs() {
                   <div className="h-0.5 w-full bg-gray-200"></div>
                 </div>
                 <a
-                  href="#"
+                  href="/"
                   className="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-gray-300 rounded-full group hover:border-gray-400"
                 >
                   <span
@@ -88,7 +87,7 @@ export default function Breadcrumbs() {
                   <div className="h-0.5 w-full bg-gray-200"></div>
                 </div>
                 <a
-                  href="#"
+                  href="/"
                   className="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-gray-300 rounded-full group hover:border-gray-400"
                 >
                   <span

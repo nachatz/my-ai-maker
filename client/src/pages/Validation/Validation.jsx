@@ -80,7 +80,7 @@ export default function Validation() {
                         </span>
                         ❖
                       </div>
-                      <span class="mt-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-primary-600 bg-primary-200 uppercase last:mr-0 mr-1">
+                      <span className="mt-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-primary-600 bg-primary-200 uppercase last:mr-0 mr-1">
                         {item.feature}
                       </span>
                       <br></br>

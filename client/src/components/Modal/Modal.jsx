@@ -3,7 +3,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { VariableIcon } from "@heroicons/react/24/outline";
 import { clearState } from "../../lib/utils/utils";
 import { Link } from "react-router-dom";
-import { postCsv } from "../../api/process";
 
 import LandingModal from "./LandingModal/LandingModal";
 
@@ -22,8 +21,8 @@ export default function Modal({ open, setOpen }) {
       formData.append("file", selectedFile);
       setResponse("loading");
       try {
-        const apiResponse = await postCsv(formData);
-        setResponse(apiResponse);
+        //const apiResponse = await postCsv(formData);
+        setResponse("");
       } catch (error) {
         setResponse("500 - Error making the request");
       }

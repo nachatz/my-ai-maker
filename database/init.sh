@@ -23,6 +23,7 @@ POSTGRES_USER="$1"
 POSTGRES_PASSWORD="$2"
 NEW_DATABASE_NAME="$3"
 PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -c "CREATE DATABASE $NEW_DATABASE_NAME;"
+DB_UTILS="$4"
 
 # Check if the database creation was successful
 if [ $? -eq 0 ]; then

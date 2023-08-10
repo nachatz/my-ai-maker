@@ -3,17 +3,6 @@ import { useLocation } from "react-router-dom";
 import { useValidationData } from "../../hooks/useValidationData";
 import Flyout from "../../components/Flyout/Flyout";
 import LoadingOverlay from "../../components/LoadingOverlay/LoadingOverylay";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-
-function CustomButton() {
-  return (
-    <div className="flex justify-center items-center">
-      <button className="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded border border-primary-500 px-6 text-sm font-medium tracking-wide text-primary-500 shadow-lg shadow-primary-100 transition duration-300 hover:border-primary-400 hover:text-primary-600 hover:shadow-md hover:shadow-primary-200 focus:border-primary-700 focus:text-primary-700 focus:shadow-md focus:shadow-primary-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-primary-300 disabled:text-primary-300 disabled:shadow-none">
-        <span>Next</span>
-      </button>
-    </div>
-  );
-}
 
 export default function Validation() {
   const location = useLocation();
@@ -100,8 +89,6 @@ export default function Validation() {
           </div>
         </div>
       </div>
-      <CustomButton />
-      <Breadcrumbs />
     </section>
   );
 }

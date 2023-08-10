@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function Breadcrumbs() {
+export default function Breadcrumbs({ step }) {
+  const steps = ["Encodings", "Transformations"]
   return (
     <section>
       <div className="items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24">
@@ -9,7 +10,7 @@ export default function Breadcrumbs() {
             <ol
               className="flex items-center justify-center mx-auto "
             >
-              <li className="mr-5 font-bold">Encodings</li>
+              <li className="mr-5 font-bold">{steps[step]}</li>
               <li className="relative pr-8 sm:pr-20">
                 <div
                   className="absolute inset-0 flex items-center"

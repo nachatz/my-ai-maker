@@ -9,15 +9,14 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { classNames } from "../../lib/utils/utils";
 import { navigation } from "./nav-options";
-import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useSession } from "next-auth/react";
+import Link from 'next/link';
 
-import "./Navbar.css";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const { isLoading } = useAuth0();
-
+  const { data: sessionData } = useSession();
+  // {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
@@ -51,14 +50,10 @@ export default function Navbar() {
               </div>
               {/* Handle desktop nav */}
               <NavItems navigation={navigation} />
-              {isLoading ? (
-                <Loading auth={true} />
-              ) : (
                 <>
                   <Searchbar />
                   <Profiles />
                 </>
-              )}
             </div>
           </div>
           {/* Handle mobile nav */}
@@ -68,7 +63,7 @@ export default function Navbar() {
                 <Disclosure.Button
                   key={item.name}
                   as={Link}
-                  to={item.href}
+                  href="/"
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"

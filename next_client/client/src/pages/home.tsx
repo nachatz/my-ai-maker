@@ -5,6 +5,7 @@ import Content from "../components/Content/Home/Content";
 import Pricing from "../components/Pricing/Pricing";
 import Sections from "../components/Sections/Sections";
 import Stats from "../components/Stats/Stats";
+import Navbar from "../components/Navbar/Navbar";
 
 import { features, content } from "../options/home/features";
 import { docContent, documents } from "../options/home/documents";
@@ -13,6 +14,7 @@ import { stats } from "../options/home/stats";
 export default function Home() {
   return (
     <>
+      <Navbar />
       <Content />
       <Banner />
       <Features features={features} content={content} />

@@ -1,6 +1,7 @@
 import React from "react";
 import { classNames } from "../../../lib/utils/utils";
-import Link from 'next/link';
+import { Link } from "react-router-dom";
+import "../Navbar.css";
 
 export default function NavItems({ navigation }) {
   return (
@@ -21,7 +22,7 @@ export default function NavItems({ navigation }) {
         <div className="flex items-center justify-center space-x-4 h-full">
           {navigation.map((item) => (
             <Link
-              href={item.href}
+              to={item.href}
               key={item.name}
               className={classNames(
                 "relative inline-block",

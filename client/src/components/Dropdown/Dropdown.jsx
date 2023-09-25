@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { classNames } from "../../lib/utils/utils";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
 const options = [
   { name: "Logistic Regression", href: "/logistic-regression" },

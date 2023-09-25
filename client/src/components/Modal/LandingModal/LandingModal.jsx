@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import Dropdown from "../../Dropdown/Dropdown";
 import Loading from "../../Loading/Loading";
 
@@ -17,7 +17,7 @@ export default function LandingModal({
             We'll handle the rest. If you have any questions, please refer to
             our{" "}
             <Link
-              to="/docs"
+              href="/docs"
               className="text-primary-600 hover:text-primary-400"
             >
               documentation

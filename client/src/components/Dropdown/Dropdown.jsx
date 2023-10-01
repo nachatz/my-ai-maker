@@ -37,7 +37,7 @@ export default function Dropdown() {
               <Menu.Item key={option.name}>
                 {({ active }) => (
                   <Link
-                    to={option.href}
+                    href={option.href}
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block px-4 py-2 text-sm"

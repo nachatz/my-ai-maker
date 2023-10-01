@@ -2,7 +2,6 @@ import React from "react";
 import Searchbar from "../Searchbar/Searchbar";
 import Profiles from "./Profiles/Profiles";
 import NavItems from "./NavItems/NavItems";
-import Loading from "../Loading/Loading";
 
 import { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";

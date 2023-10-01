@@ -2,7 +2,7 @@ import React from "react";
 import { classNames } from "../../../lib/utils/utils";
 import Link from 'next/link';
 
-export default function NavItems({ navigation }) {
+export default function NavItems({ navigation } : any) {
   return (
     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
       <div className="flex flex-shrink-0 items-center">

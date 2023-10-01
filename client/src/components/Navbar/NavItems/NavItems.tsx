@@ -19,7 +19,7 @@ export default function NavItems({ navigation } : any) {
       </div>
       <div className="hidden sm:ml-6 sm:block">
         <div className="flex items-center justify-center space-x-4 h-full">
-          {navigation.map((item) => (
+          {navigation.map((item: any) => (
             <Link
               href={item.href}
               key={item.name}

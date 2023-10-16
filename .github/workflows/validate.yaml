@@ -24,4 +24,6 @@ jobs:
     - name: Run lint
       run: |
         cd client 
+        chmod +x create-env.sh
+        ./create-env.sh
         npm run lint

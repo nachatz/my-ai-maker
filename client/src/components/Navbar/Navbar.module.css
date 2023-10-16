@@ -1,0 +1,51 @@
+/*
+You do not need to worry about .error {} colliding with any other `.css` or
+`.module.css` files!
+*/
+.error {
+  color: white;
+  background-color: red;
+}
+
+@keyframes underlineAnimation {
+  0% {
+    width: 0;
+    transform-origin: center center;
+  }
+  50% {
+    width: 100%;
+    transform-origin: left center;
+  }
+  100% {
+    width: 100%;
+    transform-origin: left center;
+  }
+}
+
+a.customLink::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background-color: #000;
+  transform: translateX(-50%);
+  transition: width 0.3s ease-in-out;
+}
+
+a.customLink {
+  cursor: pointer;
+}
+
+a.customLink:hover::after {
+  width: 100%;
+}
+
+.navbar {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scrolled {
+  opacity: 0.9;
+}

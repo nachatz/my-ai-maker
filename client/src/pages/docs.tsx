@@ -1,14 +1,12 @@
-import React from "react";
-import Content from "../components/Content/Docs/Content"
-import Faq from "../components/Faq/Faq";
-import Navbar from "~/components/Navbar/Navbar";
+import { DocsContent, Faq, Footer, Navbar } from "~/components";
 
 export default function Docs() {
   return (
     <>
-      <Navbar />
-      <Content />
+      <Navbar page="Docs"/>
+      <DocsContent />
       <Faq />
+      <Footer />
     </>
   );
 }

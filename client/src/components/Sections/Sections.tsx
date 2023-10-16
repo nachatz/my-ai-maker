@@ -1,15 +1,10 @@
 import React from "react";
-import Link from 'next/link';
-import {DocumentsArray, DocContent} from "../../models/models"
+import Link from "next/link";
+import type { SectionsProps }  from "~/types";
 
-interface Props {
-  sections: DocumentsArray;
-  content: DocContent;
-}
-
-export default function Sections({ sections, content }: Props) {
+export default function Sections({ sections, content }: SectionsProps) {
   return (
-    <div className="py-24 sm:py-32 mt-20 min-w-1xl rounded-md hover:shadow-md transition duration-500 ease-in-out">
+    <div className="min-w-1xl mt-20 rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-primary-600">
@@ -33,7 +28,7 @@ export default function Sections({ sections, content }: Props) {
                   {section.date}
                 </time>
                 <Link
-                  href={section.category}
+                  href={section.category.href}
                   className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                 >
                   {section.category.title}
@@ -41,7 +36,7 @@ export default function Sections({ sections, content }: Props) {
               </div>
               <div className="group relative">
                 <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                  <Link href={section}>
+                  <Link href={section.href}>
                     <span className="absolute inset-0" />
                     {section.title}
                   </Link>
@@ -58,7 +53,7 @@ export default function Sections({ sections, content }: Props) {
                 />
                 <div className="text-sm leading-6">
                   <p className="font-semibold text-gray-900">
-                    <Link href={section.author}>
+                    <Link href={section.author.href}>
                       <span className="absolute inset-0" />
                       {section.author.name}
                     </Link>

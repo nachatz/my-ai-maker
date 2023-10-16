@@ -1,26 +1,35 @@
 import React from "react";
-import Features from "../components/Features/Features";
-import Banner from "../components/Banner/Banner";
-import Content from "../components/Content/Home/Content";
-import Pricing from "../components/Pricing/Pricing";
-import Sections from "../components/Sections/Sections";
-import Stats from "../components/Stats/Stats";
-import Navbar from "~/components/Navbar/Navbar";
-import Footer from "~/components/Footer/Footer"
-import { features, content } from "../options/home/features";
-import { docContent, documents } from "../options/home/documents";
-import { stats } from "../options/home/stats";
+// Components
+import {
+  Footer,
+  Navbar,
+  HomeContent,
+  Banner,
+  Pricing,
+  Features,
+  Sections,
+  Stats,
+} from "~/components";
+
+// Options
+import {
+  featuresFeatures,
+  featuresContent,
+} from "~/components/Features/options";
+import { pricingFeatures } from "~/components/Pricing/options";
+import { sectionSections, sectionContent } from "~/components/Sections/options";
+import { statsStats } from "~/components/Stats/options";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <Content />
+      <Navbar page="Home" />
+      <HomeContent />
       <Banner />
-      <Features features={features} content={content} />
-      <Pricing />
-      <Sections sections={documents} content={docContent} />
-      <Stats stats={stats} />
+      <Features features={featuresFeatures} content={featuresContent} />
+      <Pricing features={pricingFeatures} />
+      <Sections sections={sectionSections} content={sectionContent} />
+      <Stats stats={statsStats} />
       <Footer />
     </>
   );

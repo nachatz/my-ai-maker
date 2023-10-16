@@ -1,14 +1,9 @@
 import React from "react";
-import {Content, FeaturesArray} from "../../models/models"
+import type { FeaturesProps } from "~/types";
 
-interface Props {
-  content: Content;
-  features: FeaturesArray;
-}
-
-export default function Features({ content, features }: Props) {
+export default function Features({ content, features }: FeaturesProps) {
   return (
-    <div className="py-24 sm:py-32 sm:mt-[10rem] rounded-md hover:shadow-md transition duration-500 ease-in-out">
+    <div className="rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:mt-[10rem] sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-primary-600">

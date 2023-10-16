@@ -1,0 +1,11 @@
+export { default as Banner } from "./Banner/Banner";
+export { default as HomeContent } from "./Content/Home/Content";
+export { default as DocsContent } from "./Content/Docs/Content";
+export { default as Faq } from "./Faq/Faq";
+export { default as Features } from "./Features/Features";
+export { default as Footer } from "./Footer/Footer";
+export { default as Navbar } from "./Navbar/Navbar";
+export { default as Pricing } from "./Pricing/Pricing";
+export { default as Searchbar } from "./Searchbar/Searchbar";
+export { default as Sections } from "./Sections/Sections";
+export { default as Stats } from "./Stats/Stats";

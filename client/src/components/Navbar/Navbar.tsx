@@ -9,16 +9,16 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { classNames } from "~/lib/utils/utils";
 import { navigation } from "./nav-options";
-import "./Navbar.module.css";
+import styles from "./Navbar.module.css";
 
 // import { useSession } from "next-auth/react";
 
 export default function Navbar({ page }: { page: string }) {
   const [scrolled, setScrolled] = useState(false);
-  const dynamicPages = navigation.map((item) => { 
+  const dynamicPages = navigation.map((item) => {
     item.current = page === item.name ? true : false;
     return item;
-  })
+  });
 
   // const { data: sessionData } = useSession();
   // {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
@@ -37,8 +37,8 @@ export default function Navbar({ page }: { page: string }) {
   return (
     <Disclosure
       as="nav"
-      className={`position-0 fixed z-10 w-full bg-white ${
-        scrolled ? "scrolled" : ""
+      className={`fixed z-10 w-full bg-white ${
+        scrolled ? styles.scrolled : ""
       }`}
     >
       {({ open }) => (
@@ -68,8 +68,7 @@ export default function Navbar({ page }: { page: string }) {
             <div className="space-y-1 px-2 pb-3 pt-2">
               {dynamicPages.map(
                 (item: { name: string; href: string; current?: boolean }) => (
-                  <Link key={item.name} href={item.href} passHref>
-                    <Disclosure.Button
+                  <Link key={item.name} href={item.href} passHref
                       className={classNames(
                         Boolean(item.current)
                           ? "bg-gray-900 text-white"
@@ -79,7 +78,6 @@ export default function Navbar({ page }: { page: string }) {
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
-                    </Disclosure.Button>
                   </Link>
                 ),
               )}

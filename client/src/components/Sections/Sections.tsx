@@ -21,7 +21,7 @@ export default function Sections({ sections, content }: SectionsProps) {
           {sections.map((section) => (
             <article
               key={section.id}
-              className="flex max-w-xl flex-col items-start justify-between"
+              className="flex max-w-xl flex-col items-center justify-center sm:items-start sm:justify-between"
             >
               <div className="flex items-center gap-x-4 text-xs">
                 <time dateTime={section.datetime} className="text-gray-500">
@@ -29,19 +29,19 @@ export default function Sections({ sections, content }: SectionsProps) {
                 </time>
                 <Link
                   href={section.category.href}
-                  className="relative z-1 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                  className="relative z-1 rounded-full bg-white px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-50"
                 >
                   {section.category.title}
                 </Link>
               </div>
               <div className="group relative">
-                <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                <h3 className="text-center sm:text-left mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                   <Link href={section.href}>
                     <span className="absolute inset-0" />
                     {section.title}
                   </Link>
                 </h3>
-                <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                <p className="text-center sm:text-left mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
                   {section.description}
                 </p>
               </div>

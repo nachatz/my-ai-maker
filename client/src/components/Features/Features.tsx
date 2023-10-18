@@ -9,11 +9,11 @@ import {
 
 export default function Features({ content, features }: FeaturesProps) {
   const icons = [
-    <FingerPrintIcon className="w-8 h-8"/>,
-    <ArrowPathIcon className="w-8 h-8"/>,
-    <LockClosedIcon className="w-8 h-8"/>,
-    <CloudArrowUpIcon className="w-8 h-8"/>
-  ]
+    <FingerPrintIcon key="print" className="h-8 w-8" />,
+    <ArrowPathIcon key="arrow" className="h-8 w-8" />,
+    <LockClosedIcon key="lock" className="h-8 w-8" />,
+    <CloudArrowUpIcon key="cloud" className="h-8 w-8" />,
+  ];
 
   return (
     <div className="mt-[19rem] rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:mt-[10rem] sm:py-32">
@@ -31,7 +31,7 @@ export default function Features({ content, features }: FeaturesProps) {
         </div>
         <div className="mx-auto mt-16 max-w-2xl lg:max-w-4xl">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-          {features.map((feature, i) => {
+            {features.map((feature, i) => {
               return (
                 <div key={feature.name} className="relative pl-16">
                   <dt className="text-base font-semibold leading-7 text-gray-900">

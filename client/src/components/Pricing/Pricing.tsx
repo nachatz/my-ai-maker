@@ -5,16 +5,19 @@ import type { PricingProps } from "~/types";
 
 export default function Pricing({ features }: PricingProps) {
   return (
-    <div className="py-24 sm:py-32 mt-20 rounded-md hover:shadow-md transition duration-500 ease-in-out">
+    <div className="mt-20 rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl sm:text-center">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-base font-semibold leading-7 text-primary-600">
+            Start today, with no cost
+          </h2>
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             No commitments
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             The application is currently in beta. Pricing is subject to change,
-            but don&apos;t worry, we&apos;ll always notify you beforehand. For now, you
-            can use the application for free
+            but don&apos;t worry, we&apos;ll always notify you beforehand. For
+            now, you can use the application for free
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
@@ -23,9 +26,10 @@ export default function Pricing({ features }: PricingProps) {
               Beta Access
             </h3>
             <p className="mt-6 text-base leading-7 text-gray-600">
-              Access to the application right now is currently free, you don&apos;t
-              even need to make an account for simple models. If you&apos;d like to
-              manage your models and data, we recommend making an account.
+              Access to the application right now is currently free, you
+              don&apos;t even need to make an account for simple models. If
+              you&apos;d like to manage your models and data, we recommend
+              making an account.
             </p>
             <div className="mt-10 flex items-center gap-x-4">
               <h4 className="flex-none text-sm font-semibold leading-6 text-primary-600">
@@ -66,8 +70,8 @@ export default function Pricing({ features }: PricingProps) {
                   Register
                 </Link>
                 <p className="mt-6 text-xs leading-5 text-gray-600">
-                  No credit card required and no newsletter sign up. We&apos;ll only
-                  contact you on major changes.
+                  No credit card required and no newsletter sign up. We&apos;ll
+                  only contact you on major changes.
                 </p>
               </div>
             </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Banner() {
   return (
-    <div className="mt-[5rem] flex items-center justify-center md:mt-[15rem] lg:mt-[24rem]">
+    <div className="hidden items-center justify-center mt-[24rem] md:flex">
       <div className="relative isolate flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
         <div
           className="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl"
@@ -18,7 +18,7 @@ export default function Banner() {
           <div />
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <p className="text-sm leading-6 text-text-900">
+          <p className="text-center text-sm leading-6 text-text-900">
             <strong className="font-semibold">Modern ML</strong>
             <svg
               viewBox="0 0 2 2"
@@ -27,8 +27,9 @@ export default function Banner() {
             >
               <circle cx={1} cy={1} r={1} />
             </svg>
-            Register an account and cache your models for free. You&apos;ll be able
-            to navigate here to see predictions and productionalize your models
+            Register an account and cache your models for free. You&apos;ll be
+            able to navigate here to see predictions and productionalize your
+            models
           </p>
           <Link
             href="/"

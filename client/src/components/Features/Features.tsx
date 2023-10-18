@@ -3,9 +3,9 @@ import type { FeaturesProps } from "~/types";
 
 export default function Features({ content, features }: FeaturesProps) {
   return (
-    <div className="rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:mt-[10rem] sm:py-32">
+    <div className="mt-[19rem] rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:mt-[10rem] sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
+        <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-base font-semibold leading-7 text-primary-600">
             {content.subtitle}
           </h2>

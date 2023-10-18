@@ -1,6 +1,6 @@
 export default function Content() {
   return (
-    <div className="mx-auto max-w-2xl lg:text-center pt-[10rem]">
+    <div className="mx-auto max-w-2xl text-center pt-[8rem]">
       <h2 className="text-base font-semibold leading-7 text-indigo-600">
         Train Your Machine Learning Models
       </h2>

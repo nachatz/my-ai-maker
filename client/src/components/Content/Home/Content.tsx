@@ -1,6 +1,6 @@
 export default function Content() {
   return (
-    <div className="mx-auto max-w-2xl text-center pt-[8rem]">
+    <div className="mx-auto max-w-2xl text-center pt-[8rem] px-6"> {/* Added px-4 for padding */}
       <h2 className="text-base font-semibold leading-7 text-indigo-600">
         Train Your Machine Learning Models
       </h2>
@@ -14,7 +14,7 @@ export default function Content() {
       </p>
       <div className="flex justify-center mt-8">
         <button
-          className="bg-primary-500 text-white font-semibold py-2 px-5 rounded-md shadow-md hover:bg-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 focus:ring-offset-1"
+          className="bg-primary-500 text-white font-semibold py-2 px-6 rounded-md shadow-md hover:bg-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 focus:ring-offset-1"
         >
           Try it now (it&apos;s free!)
         </button>

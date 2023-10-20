@@ -1,32 +1,5 @@
-import React from "react";
-// Components
-import {
-  HomeContent,
-  Banner,
-  Pricing,
-  Features,
-  Sections,
-  Stats,
-} from "~/components";
-
-// Options
-import {
-  featuresFeatures,
-  featuresContent,
-} from "~/components/Features/options";
-import { pricingFeatures } from "~/components/Pricing/options";
-import { sectionSections, sectionContent } from "~/components/Sections/options";
-import { statsStats } from "~/components/Stats/options";
+import { LandingLayout } from "~/layouts";
 
 export default function Home() {
-  return (
-    <>
-      <HomeContent />
-      <Banner />
-      <Features features={featuresFeatures} content={featuresContent} />
-      <Pricing features={pricingFeatures} />
-      <Sections sections={sectionSections} content={sectionContent} />
-      <Stats stats={statsStats} />
-    </>
-  );
+  return <LandingLayout />;
 }

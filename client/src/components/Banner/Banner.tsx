@@ -32,7 +32,7 @@ export default function Banner() {
             models
           </p>
           <Link
-            href="/"
+            href="/auth/login"
             className="flex-none rounded-full bg-primary-600 px-3.5 py-1 text-sm font-semibold text-white shadow-md hover:bg-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-900"
           >
             Register <span aria-hidden="true">&rarr;</span>

@@ -11,17 +11,10 @@ import { classNames } from "~/lib/utils/utils";
 import { navigation } from "./nav-options";
 import styles from "./Navbar.module.css";
 
-// import { useSession } from "next-auth/react";
-
-export default function Navbar({ page }: { page: string }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const dynamicPages = navigation.map((item) => {
-    item.current = page === item.name ? true : false;
-    return item;
-  });
+  const [currentPage, setCurrentPage] = useState("Home");
 
-  // const { data: sessionData } = useSession();
-  // {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
@@ -33,6 +26,7 @@ export default function Navbar({ page }: { page: string }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
 
   return (
     <Disclosure
@@ -56,7 +50,11 @@ export default function Navbar({ page }: { page: string }) {
                 </Disclosure.Button>
               </div>
               {/* Handle desktop nav */}
-              <NavItems navigation={dynamicPages} />
+              <NavItems
+                navigation={navigation}
+                setState={setCurrentPage}
+                state={currentPage}
+              />
               <>
                 <Searchbar />
                 <Profiles />
@@ -66,18 +64,22 @@ export default function Navbar({ page }: { page: string }) {
           {/* Handle mobile nav */}
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {dynamicPages.map(
+              {navigation.map(
                 (item: { name: string; href: string; current?: boolean }) => (
-                  <Link key={item.name} href={item.href} passHref
-                      className={classNames(
-                        Boolean(item.current)
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "block rounded-md px-3 py-2 text-base font-medium",
-                      )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    passHref
+                    className={classNames(
+                      Boolean(item.name === currentPage)
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block rounded-md px-3 py-2 text-base font-medium",
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                    onClick={() => setCurrentPage(item.name)}
+                  >
+                    {item.name}
                   </Link>
                 ),
               )}

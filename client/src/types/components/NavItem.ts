@@ -1,5 +1,7 @@
 interface Props {
   navigation: NavigationItemArray;
+  state: string;
+  setState: (state: string) => void;
 }
 
 type NavigationItem = {

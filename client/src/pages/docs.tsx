@@ -1,12 +1,10 @@
-import { DocsContent, Faq, Footer, Navbar } from "~/components";
+import { DocsContent, Faq } from "~/components";
 
 export default function Docs() {
   return (
     <>
-      <Navbar page="Docs"/>
       <DocsContent />
       <Faq />
-      <Footer />
     </>
   );
 }

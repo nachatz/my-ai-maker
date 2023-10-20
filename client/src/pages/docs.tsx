@@ -1,10 +1,7 @@
-import { DocsContent, Faq } from "~/components";
+import { DocsLayout } from "~/layouts";
 
 export default function Docs() {
   return (
-    <>
-      <DocsContent />
-      <Faq />
-    </>
+    <DocsLayout />
   );
 }

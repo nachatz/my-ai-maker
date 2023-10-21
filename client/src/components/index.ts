@@ -9,3 +9,4 @@ export { default as Pricing } from "./Pricing/Pricing";
 export { default as Searchbar } from "./Searchbar/Searchbar";
 export { default as Sections } from "./Sections/Sections";
 export { default as Stats } from "./Stats/Stats";
+export { default as LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";

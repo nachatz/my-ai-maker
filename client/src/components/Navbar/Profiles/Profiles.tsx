@@ -5,9 +5,15 @@ import { classNames } from "~/lib/utils/utils";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import styles from "../Navbar.module.css";
+import { LoadingSpinner } from "~/components";
 
 export default function Profiles() {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status } = useSession();
+
+  if (status === "loading") {
+    return <LoadingSpinner />;
+  }
+
   return (
     <>
       {sessionData ? (

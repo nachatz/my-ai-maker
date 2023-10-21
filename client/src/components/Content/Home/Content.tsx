@@ -4,6 +4,7 @@ export default function Content() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const scrollFactorGlobe = 0.85;
   const scrollFactorContent = 0.5;
@@ -12,7 +13,19 @@ export default function Content() {
     function handleScroll() {
       setScrollPosition(window.scrollY);
     }
-
+    const userAgent = window.navigator.userAgent;
+    const mobileKeywords = [
+      "Mobile",
+      "Android",
+      "iPhone",
+      "iPad",
+      "iPod",
+      "Windows Phone",
+    ];
+    const isMobileDevice = mobileKeywords.some((keyword) =>
+      userAgent.includes(keyword),
+    );
+    setIsMobile(isMobileDevice);
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -22,22 +35,29 @@ export default function Content() {
 
   useEffect(() => {
     if (videoRef.current && contentRef.current) {
+      const reactiveFactorGlobe = !isMobile
+        ? scrollFactorGlobe
+        : scrollFactorGlobe * 0.6;
+      const reactiveFactorContent = !isMobile
+        ? scrollFactorContent
+        : scrollFactorContent * 0.6;
+
       const opacityFactorGlobe =
-        1 - scrollPosition / (window.innerHeight * scrollFactorGlobe);
+        1 - scrollPosition / (window.innerHeight * reactiveFactorGlobe);
       const opacityFactorContent =
-        1 - scrollPosition / (window.innerHeight * scrollFactorContent);
+        1 - scrollPosition / (window.innerHeight * reactiveFactorContent);
 
       videoRef.current.style.transform = `translateY(${
-        scrollPosition * scrollFactorGlobe
+        scrollPosition * reactiveFactorGlobe
       }px)`;
       videoRef.current.style.opacity = opacityFactorGlobe.toString();
 
       contentRef.current.style.transform = `translateY(${
-        scrollPosition * scrollFactorContent
+        scrollPosition * reactiveFactorContent
       }px)`;
       contentRef.current.style.opacity = opacityFactorContent.toString();
     }
-  }, [scrollPosition]);
+  }, [scrollPosition, isMobile]);
 
   return (
     <div className="shadow-inner-2xl relative h-screen">

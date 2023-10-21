@@ -4,7 +4,7 @@ import type { SectionsProps }  from "~/types";
 
 export default function Sections({ sections, content }: SectionsProps) {
   return (
-    <div className="min-w-1xl mt-20 rounded-md py-24 transition duration-500 ease-in-out hover:shadow-md sm:py-32">
+    <div className="min-w-1xl mt-20 rounded-md py-24 transition duration-500 ease-in-out sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-base font-semibold leading-7 text-primary-600">

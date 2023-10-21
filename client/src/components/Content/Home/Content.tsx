@@ -43,6 +43,8 @@ export default function Content() {
     <div className="shadow-inner-2xl relative h-screen">
       <video
         ref={videoRef}
+        webkit-playsinline={`${true}`}
+        playsInline
         autoPlay
         muted
         loop

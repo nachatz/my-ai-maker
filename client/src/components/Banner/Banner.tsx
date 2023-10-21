@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Banner() {
   return (
-    <div className="hidden items-center justify-center mt-[24rem] md:flex">
+    <div className="absolute bottom-0 hidden items-center justify-center md:flex">
       <div className="relative isolate flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
         <div
           className="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl"

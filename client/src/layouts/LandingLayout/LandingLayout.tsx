@@ -1,13 +1,6 @@
 import React from "react";
 // Components
-import {
-  HomeContent,
-  Banner,
-  Pricing,
-  Features,
-  Sections,
-  Stats,
-} from "~/components";
+import { HomeContent, Pricing, Features, Sections, Stats } from "~/components";
 
 // Options
 import {
@@ -22,7 +15,6 @@ export default function LandingLayout() {
   return (
     <>
       <HomeContent />
-      <Banner />
       <Features features={featuresFeatures} content={featuresContent} />
       <Pricing features={pricingFeatures} />
       <Sections sections={sectionSections} content={sectionContent} />

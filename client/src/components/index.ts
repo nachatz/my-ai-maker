@@ -4,6 +4,8 @@ export { default as DocsContent } from "./Content/Docs/Content";
 export { default as Faq } from "./Faq/Faq";
 export { default as Features } from "./Features/Features";
 export { default as Footer } from "./Footer/Footer";
+export { default as Slide } from "./Slide/Slide";
+export { default as AlternateSlide } from "./Slide/AlternateSlide";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as Pricing } from "./Pricing/Pricing";
 export { default as Searchbar } from "./Searchbar/Searchbar";

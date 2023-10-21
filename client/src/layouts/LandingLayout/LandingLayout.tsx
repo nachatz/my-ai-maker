@@ -1,6 +1,13 @@
 import React from "react";
 // Components
-import { HomeContent, Pricing, Features, Sections, Stats } from "~/components";
+import {
+  HomeContent,
+  Pricing,
+  Features,
+  Sections,
+  Stats,
+  AlternateSlide,
+} from "~/components";
 
 // Options
 import {
@@ -13,12 +20,14 @@ import { statsStats } from "~/components/Stats/options";
 
 export default function LandingLayout() {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <HomeContent />
-      <Features features={featuresFeatures} content={featuresContent} />
-      <Pricing features={pricingFeatures} />
-      <Sections sections={sectionSections} content={sectionContent} />
-      <Stats stats={statsStats} />
-    </>
+      <AlternateSlide>
+        <Features features={featuresFeatures} content={featuresContent} />
+        <Pricing features={pricingFeatures} />
+        <Sections sections={sectionSections} content={sectionContent} />
+        <Stats stats={statsStats} />
+      </AlternateSlide>
+    </div>
   );
 }

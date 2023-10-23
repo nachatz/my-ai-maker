@@ -3,10 +3,13 @@ import { motion, useAnimation } from "framer-motion";
 
 type ChildrenWithNoProps = {
   children: ReactNode;
-  left: boolean;
+  left?: boolean;
+  duration?: number;
+  opacity?: number;
+  type?: string;
 };
 
-export default function Slide({ children, left }: ChildrenWithNoProps) {
+export default function Slide({ children, left, duration = 1.5, opacity = 0, type = "easeInOut" }: ChildrenWithNoProps) {
   const controls = useAnimation();
   const ref = useRef(null);
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -15,14 +18,14 @@ export default function Slide({ children, left }: ChildrenWithNoProps) {
   const variants = {
     hidden: {
       x: left ? 100 : -100,
-      opacity: 0,
+      opacity: opacity,
     },
     visible: {
       x: 0,
       opacity: 1,
       transition: {
-        duration: 1.5,
-        type: "easeInOut",
+        duration: duration,
+        type: type,
       },
     },
   };

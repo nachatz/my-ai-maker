@@ -10,7 +10,7 @@ export default function Slide({ children, left }: ChildrenWithNoProps) {
   const controls = useAnimation();
   const ref = useRef(null);
   const [animationComplete, setAnimationComplete] = useState(false);
-  const threshold = 0.5;
+  const threshold = 0.6;
 
   const variants = {
     hidden: {
@@ -28,7 +28,6 @@ export default function Slide({ children, left }: ChildrenWithNoProps) {
   };
 
   useEffect(() => {
-
     if (!animationComplete) {
       void controls.start("hidden");
     }
@@ -45,7 +44,7 @@ export default function Slide({ children, left }: ChildrenWithNoProps) {
 
         if (rect.top < windowHeight * threshold) {
           if (!animationComplete) {
-           void controls.start("visible");
+            void controls.start("visible");
             setAnimationComplete(true);
           }
         }

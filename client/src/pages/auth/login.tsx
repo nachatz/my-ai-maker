@@ -5,11 +5,13 @@ import type {
 import { getProviders, signIn } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "~/server/auth";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function login({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
   return (
     <>
       <div className="mt-[6rem] flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -32,12 +34,17 @@ export default function login({
               Sign in with Google
             </button>
           ))}
-          <Link
+          {/* eslint-disable-next-line  @next/next/no-html-link-for-pages*/}
+          <a
+            // Since the navbar is rendered on client, needs a hard refresh
+            onClick={() => {
+              router.reload();
+            }}
             href="/"
             className="w-25 ml-5 flex rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Back
-          </Link>
+          </a>
         </div>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <p className="mt-5 text-center text-sm text-gray-500">

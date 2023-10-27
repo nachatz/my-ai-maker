@@ -1,4 +1,4 @@
-interface Props {
+interface NavItemProps {
   navigation: NavigationItemArray;
   state: string;
   setState: (state: string) => void;
@@ -12,4 +12,4 @@ type NavigationItem = {
 
 type NavigationItemArray = NavigationItem[];
 
-export type { Props };
+export type { NavigationItem, NavigationItemArray, NavItemProps };

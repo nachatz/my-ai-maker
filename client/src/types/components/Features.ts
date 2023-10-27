@@ -1,4 +1,4 @@
-interface Props {
+interface FeaturesProps {
   content: Content;
   features: FeaturesArray;
 }
@@ -17,4 +17,4 @@ type Feature = {
 
 type FeaturesArray = Feature[];
 
-export type { Props };
+export type { Content, Feature, FeaturesArray, FeaturesProps };

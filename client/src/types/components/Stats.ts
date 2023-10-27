@@ -1,4 +1,4 @@
-interface Props {
+interface StatsProps {
   stats: StatArray;
 }
 
@@ -10,4 +10,4 @@ type Stat = {
 
 type StatArray = Stat[];
 
-export type { Props };
+export type { StatsProps, Stat, StatArray };

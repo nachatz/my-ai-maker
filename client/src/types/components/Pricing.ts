@@ -1,7 +1,7 @@
-interface Props {
+interface PricingProps {
   features: FeaturesArray;
 }
 
 type FeaturesArray = string[];
 
-export type { Props };
+export type { PricingProps };

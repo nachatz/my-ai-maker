@@ -1,9 +1,9 @@
-interface Props {
+interface SectionsProps {
   sections: SectionArray;
-  content: Content;
+  content: SectionContent;
 }
 
-type Content = {
+type SectionContent = {
   subtitle: string;
   title: string;
   description: string;
@@ -30,4 +30,4 @@ type Section = {
 
 type SectionArray = Section[];
 
-export type { Props };
+export type { SectionsProps, SectionContent };

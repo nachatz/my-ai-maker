@@ -34,10 +34,10 @@ export default function ModelsNav({
 
   return (
     <>
-      <div className="bg-gray-50">
+      <div className="rounded-b-md bg-gray-50">
         <div
           id="application-sidebar"
-          className={`hs-overlay scrollbar-y fixed bottom-0 left-0 top-12 w-64 transform overflow-y-auto rounded-sm border-r border-gray-200 bg-white pb-10 pt-7 shadow-2xl transition-all duration-1000 ${
+          className={`hs-overlay scrollbar-y fixed bottom-0 left-0 top-12 w-64 transform overflow-y-auto rounded-r-xl border-r border-gray-200 bg-white pb-10 pt-7 shadow-2xl transition-all duration-1000 ${
             isOpen ? "lg:translate-x-0" : "-translate-x-full"
           }`}
         >

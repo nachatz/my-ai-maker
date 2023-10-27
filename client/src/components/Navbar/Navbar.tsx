@@ -27,11 +27,10 @@ export default function Navbar() {
     };
   }, []);
 
-
   return (
     <Disclosure
       as="nav"
-      className={`fixed z-10 w-full bg-white ${
+      className={`fixed z-10 w-full rounded-b-md bg-white shadow-md ${
         scrolled ? styles.scrolled : ""
       }`}
     >

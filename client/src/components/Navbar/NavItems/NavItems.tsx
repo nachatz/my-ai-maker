@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import styles from "../Navbar.module.css";
 import { classNames } from "~/lib/utils/utils";
-import type { NavItemsProps } from "~/types";
+import type { NavItemsProps, NavigationItem } from "~/types";
 import logo from "~/../public/myaimaker-logo.png";
 
 export default function NavItems({
@@ -27,7 +27,7 @@ export default function NavItems({
       </div>
       <div className="hidden sm:ml-6 sm:block">
         <div className="flex h-full items-center justify-center space-x-4">
-          {navigation.map((item) => (
+          {navigation.map((item: NavigationItem) => (
             <Link
               href={item.href}
               key={item.name}

@@ -1,8 +1,11 @@
 import type { CardType, CardArray } from "~/types";
 import { Card } from "~/components";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function CardGrid({ cards }: CardArray) {
+  const [animationComplete, setAnimationComplete] = useState(false);
+
   const cardItems = cards;
 
   return (
@@ -27,7 +30,8 @@ export default function CardGrid({ cards }: CardArray) {
             }}
             initial="hidden"
             animate="visible"
-            className="z-[-5]"
+            onAnimationComplete={() => setAnimationComplete(true)}
+            className={animationComplete ? "z-1" : "z-[-1]"}  
           >
             <Card {...card} />
           </motion.div>

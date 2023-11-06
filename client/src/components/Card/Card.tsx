@@ -44,12 +44,12 @@ export default function Card(card: CardType) {
         <h3 className="text-xl font-semibold text-gray-800">{card.title}</h3>
         <p className="mt-3 text-gray-500">{card.description}</p>
       </div>
-      <div className="mt-auto flex divide-x divide-gray-200 border-t border-gray-200">
+      <div className="cursor-pointer mt-auto flex divide-x divide-gray-200 border-t border-gray-200">
         <a
           className="inline-flex w-full items-center justify-center gap-2 rounded-bl-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
           href="#"
         >
-          View Model
+          View Models
         </a>
         <a
           className="inline-flex w-full items-center justify-center gap-2 rounded-br-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"

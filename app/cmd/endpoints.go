@@ -25,11 +25,6 @@ func InitRoutes(cfg *config.Config) http.Handler {
 
 	// Rate limit all endpoints
 	mux.Use(middleware.RateLimitMiddleware(limiter))
-
-	// Non-authenticated endpoints
-	mux.Post(api.EndpointAuthToken, func(w http.ResponseWriter, r *http.Request) {
-		handlers.GenerateJWTHandler(w, r, cfg.Auth.ClientSecret, cfg.Auth.ClientID)
-	})
 	mux.Post(api.EndpointProcess, handlers.ProcessHandler)
 
 	mux.MethodNotAllowed(methodNotAllowedHandler())

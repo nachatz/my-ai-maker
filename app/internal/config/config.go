@@ -43,20 +43,6 @@ func NewConfig() *Config {
 		log.Fatal("Failed to decode YAML:", err)
 	}
 
-	// load environment variables
-	clientSecret := os.Getenv("CLIENT_SECRET")
-	clientID := os.Getenv("CLIENT_ID")
-	issuerUrl := os.Getenv("ISSUER_URL")
-	audience := os.Getenv("AUDIENCE")
-	if clientSecret == "" || clientID == "" || issuerUrl == "" || audience == "" {
-		log.Fatal("Environment variable not set")
-	}
-
-	cfg.Auth.ClientSecret = clientSecret
-	cfg.Auth.ClientID = clientID
-	cfg.IssuerUrl = issuerUrl
-	cfg.Audience = audience
-
 	return &cfg
 }
 

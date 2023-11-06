@@ -3,17 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/joho/godotenv"
 	"github.com/nachatz/my-ai-maker/app/internal/config"
 )
 
 func main() {
-
-	// Load in environment variables
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
 	// Initialize the config
 	cfg := config.NewConfig()

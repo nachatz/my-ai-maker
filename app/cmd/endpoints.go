@@ -26,6 +26,7 @@ func InitRoutes(cfg *config.Config) http.Handler {
 	// Rate limit all endpoints
 	mux.Use(middleware.RateLimitMiddleware(limiter))
 	mux.Post(api.EndpointProcess, handlers.ProcessHandler)
+	mux.Post(api.EndpointVariable, handlers.VariableHandler)
 
 	mux.MethodNotAllowed(methodNotAllowedHandler())
 

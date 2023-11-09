@@ -9,8 +9,8 @@ import (
 	"github.com/nachatz/my-ai-maker/app/internal/utils"
 )
 
-func VariableHandler(w http.ResponseWriter, r *http.Request) {
-	/* VariableHandler - Handles the HTTP request for processing JSON variables and data types.
+func FeatureHandler(w http.ResponseWriter, r *http.Request) {
+	/* FeatureHandler - Handles the HTTP request for processing JSON features and data types.
 	   @Param w - The http.ResponseWriter to write the response to.
 	   @Param r - The *http.Request representing the incoming request.
 	*/
@@ -26,27 +26,29 @@ func VariableHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Process the JSON variables and data types
-	_, err := processVariables(request)
+	// Process the JSON features and data types
+	_, err := processFeatures(request)
 	if err != nil {
-		response.Message = "Failed to process variables"
+		response.Message = "Failed to process features"
 		response.StatusCode = http.StatusInternalServerError
 		utils.WriteResponse(w, response)
 		return
 	}
 
-	response.Message = "Successfully processed JSON variables and data types"
+	response.Message = "Successfully processed JSON features and data types"
 	response.StatusCode = http.StatusOK
 	utils.WriteResponse(w, response)
 }
 
-func processVariables(variables map[string]string) (map[string]string, error) {
-	// Process the variables and data types as needed
+func processFeatures(features map[string]string) (map[string]string, error) {
+	/* processFeatures - Handles the mapping of features from posted json
+	   @Param features - Map of feature metadata
+	*/
 	result := make(map[string]string)
 
-	for variable, dataType := range variables {
-		log.Printf("Variable: %s, DataType: %s", variable, dataType)
-		result[variable] = dataType
+	for feature, dataType := range features {
+		log.Printf("Feature: %s, DataType: %s", feature, dataType)
+		result[feature] = dataType
 	}
 
 	return result, nil

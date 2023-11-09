@@ -10,6 +10,6 @@ const (
 // API endpoints
 const (
 	EndpointProcess   = EndpointSuffix + "/process"
-	EndpointVariable  = EndpointSuffix + "/variable"
+	EndpointVariable  = EndpointSuffix + "/features"
 	EndpointAuthToken = EndpointSuffix + "/jwt"
 )

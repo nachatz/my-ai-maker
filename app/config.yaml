@@ -1,2 +1,2 @@
-cors_origins: ["http://localhost:3000"]
+cors_origins: ["http://localhost:3000", "https://my-ai-maker.vercel.app"]
 port: 8080

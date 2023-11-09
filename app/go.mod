@@ -6,7 +6,6 @@ require (
 	github.com/auth0/go-jwt-middleware/v2 v2.1.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v1.5.4
-	github.com/joho/godotenv v1.5.1
 	github.com/rs/cors v1.9.0
 	golang.org/x/time v0.3.0
 	gopkg.in/yaml.v2 v2.4.0

@@ -26,7 +26,7 @@ func GenerateCode(featureRequest models.FeatureRequest) (string, error) {
 	if language == "python" {
 		return GeneratePythonCode(
 			featureRequest,
-			code,
+			&code,
 			stringFeatures,
 			integerFeatures,
 			floatFeatures,

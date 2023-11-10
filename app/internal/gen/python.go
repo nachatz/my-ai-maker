@@ -9,7 +9,7 @@ import (
 
 func GeneratePythonCode(
 	featureRequest models.FeatureRequest,
-	pythonCode strings.Builder,
+	pythonCode *strings.Builder,
 	stringFeatures []string,
 	integerFeatures []string,
 	floatFeatures []string,
@@ -23,29 +23,29 @@ func GeneratePythonCode(
 	*/
 
 	// Generic imports
-	addCode(&pythonCode, "import pandas as pd", 0)
+	addCode(pythonCode, "import pandas as pd", 0)
 
 	// Functions
-	appendGenericFunctions(&pythonCode, stringFeatures, integerFeatures, floatFeatures)
+	appendGenericFunctions(pythonCode, stringFeatures, integerFeatures, floatFeatures)
 	pythonCode.WriteString("\n")
 
 	// Main and data read
-	addCode(&pythonCode, "def main():", 0)
-	addCode(&pythonCode, "df = pd.read_csv('your_dataset.csv')", 1)
+	addCode(pythonCode, "def main():", 0)
+	addCode(pythonCode, "df = pd.read_csv('your_dataset.csv')", 1)
 	pythonCode.WriteString("\n")
 
 	// Data aggregation
-	addCode(&pythonCode, "string_features = ["+strings.Join(addQuotes(stringFeatures), ", ")+"]", 1)
-	addCode(&pythonCode, "boolean_features = ["+strings.Join(addQuotes(booleanFeatures), ", ")+"]", 1)
-	addCode(&pythonCode, "int_features = ["+strings.Join(addQuotes(integerFeatures), ", ")+"]", 1)
-	addCode(&pythonCode, "float_features = ["+strings.Join(addQuotes(floatFeatures), ", ")+"]", 1)
+	addCode(pythonCode, "string_features = ["+strings.Join(addQuotes(stringFeatures), ", ")+"]", 1)
+	addCode(pythonCode, "boolean_features = ["+strings.Join(addQuotes(booleanFeatures), ", ")+"]", 1)
+	addCode(pythonCode, "int_features = ["+strings.Join(addQuotes(integerFeatures), ", ")+"]", 1)
+	addCode(pythonCode, "float_features = ["+strings.Join(addQuotes(floatFeatures), ", ")+"]", 1)
 	pythonCode.WriteString("\n")
 
 	// Functional code
 
 	// Calling main
-	addCode(&pythonCode, "if __name__ == '__main__':", 0)
-	addCode(&pythonCode, "main()", 1)
+	addCode(pythonCode, "if __name__ == '__main__':", 0)
+	addCode(pythonCode, "main()", 1)
 
 	return pythonCode.String(), nil
 }

@@ -60,15 +60,15 @@ func processFeatures(features models.FeatureRequest) (string, error) {
 		log.Printf("Feature: %s, DataType: %s", feature, dataType)
 	}
 
-	pythonCode, err := gen.GenerateCode(features)
+	code, err := gen.GenerateCode(features)
 
 	if err != nil {
 		return "", fmt.Errorf("failed to generate code: %v", err)
 	}
 
-	fmt.Printf("Output code:\n%s\n", pythonCode)
+	fmt.Printf("Output code:\n%s\n", code)
 
-	return pythonCode, nil
+	return code, nil
 }
 
 func validateFeatureRequest(request models.FeatureRequest) error {

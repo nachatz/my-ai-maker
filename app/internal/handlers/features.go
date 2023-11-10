@@ -38,7 +38,7 @@ func FeatureHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Process the JSON features and data types
-	code, err := processFeatures(featureRequest.Features)
+	code, err := processFeatures(featureRequest)
 	if err != nil {
 		response.Message = "Failed to process features"
 		response.StatusCode = http.StatusInternalServerError
@@ -51,16 +51,16 @@ func FeatureHandler(w http.ResponseWriter, r *http.Request) {
 	utils.WriteResponse(w, response)
 }
 
-func processFeatures(features map[string]string) (string, error) {
+func processFeatures(features models.FeatureRequest) (string, error) {
 	/* processFeatures - Handles the mapping of features from posted json
 	   @Param features - Map of feature metadata
 	*/
 
-	for feature, dataType := range features {
+	for feature, dataType := range features.Features {
 		log.Printf("Feature: %s, DataType: %s", feature, dataType)
 	}
 
-	pythonCode, err := gen.GeneratePythonCode(features)
+	pythonCode, err := gen.GenerateCode(features)
 
 	if err != nil {
 		return "", fmt.Errorf("failed to generate code: %v", err)

@@ -54,7 +54,7 @@ func processFeatures(features map[string]string) (string, error) {
 	pythonCode, err := gen.GeneratePythonCode(features)
 
 	if err != nil {
-		return "", fmt.Errorf("Failed to generate code: %v", err)
+		return "", fmt.Errorf("failed to generate code: %v", err)
 	}
 
 	fmt.Printf("Output code:\n%s\n", pythonCode)

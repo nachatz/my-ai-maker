@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -20,16 +21,24 @@ func FeatureHandler(w http.ResponseWriter, r *http.Request) {
 	var response models.Response
 
 	// Parse the JSON request body
-	var request map[string]string
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+	var featureRequest models.FeatureRequest
+	if err := json.NewDecoder(r.Body).Decode(&featureRequest); err != nil {
 		response.Message = "Failed to parse JSON request"
 		response.StatusCode = http.StatusBadRequest
 		utils.WriteResponse(w, response)
 		return
 	}
 
+	// Validate required fields
+	if err := validateFeatureRequest(featureRequest); err != nil {
+		response.Message = "Validation failed: " + err.Error()
+		response.StatusCode = http.StatusBadRequest
+		utils.WriteResponse(w, response)
+		return
+	}
+
 	// Process the JSON features and data types
-	code, err := processFeatures(request)
+	code, err := processFeatures(featureRequest.Features)
 	if err != nil {
 		response.Message = "Failed to process features"
 		response.StatusCode = http.StatusInternalServerError
@@ -60,4 +69,19 @@ func processFeatures(features map[string]string) (string, error) {
 	fmt.Printf("Output code:\n%s\n", pythonCode)
 
 	return pythonCode, nil
+}
+
+func validateFeatureRequest(request models.FeatureRequest) error {
+	// Use a validator library or manually validate each field
+	if len(request.Features) == 0 {
+		return errors.New("features field is required")
+	}
+	if request.Language == "" {
+		return errors.New("language field is required")
+	}
+	if request.Library == "" {
+		return errors.New("library field is required")
+	}
+
+	return nil
 }

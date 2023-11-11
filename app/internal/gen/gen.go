@@ -24,7 +24,7 @@ func GenerateCode(featureRequest models.FeatureRequest) (string, error) {
 	utils.ExtractFeatures(features, &stringFeatures, &integerFeatures, &floatFeatures, &booleanFeatures)
 
 	if language == "python" {
-		return GeneratePythonCode(
+		GeneratePythonCode(
 			featureRequest,
 			&code,
 			stringFeatures,
@@ -32,6 +32,7 @@ func GenerateCode(featureRequest models.FeatureRequest) (string, error) {
 			floatFeatures,
 			booleanFeatures,
 		)
+		return code.String(), nil
 	}
 
 	return "", errors.New("language not implemented")

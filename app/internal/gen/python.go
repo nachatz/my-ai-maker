@@ -14,24 +14,24 @@ func GeneratePythonCode(
 	integerFeatures []string,
 	floatFeatures []string,
 	booleanFeatures []string,
-) (string, error) {
+) {
 	/* GeneratePythonCode - Generates Python code for setting up a model
 	   @Param featureRequest - Interface of metadata for feature data
 	   @Param pythonCode - Code being generated
 	   @Param features - All features lists
 	   @Return string - Generated Python code
 	*/
-
+	var imports strings.Builder
+	var functions strings.Builder
 	parser := &FileParser{
 		Language: featureRequest.Language,
 	}
 
-	// Generic imports
-	addCode(pythonCode, parser.ParseRawCode("generic_imports.py"), 0)
+	// Generic functions and imports
+	parser.ParseRawCode("generic_imports.py", &imports, &functions)
 
 	// Functions
-	appendGenericFunctions(pythonCode, stringFeatures, integerFeatures, floatFeatures)
-	pythonCode.WriteString("\n")
+	appendFunctions(&imports, &functions, *parser, stringFeatures, integerFeatures, floatFeatures)
 
 	// Main and data read
 	addCode(pythonCode, "def main():", 0)
@@ -51,19 +51,23 @@ func GeneratePythonCode(
 	addCode(pythonCode, "if __name__ == '__main__':", 0)
 	addCode(pythonCode, "main()", 1)
 
-	return pythonCode.String(), nil
+	// Compile results
+	originalPythonCode := pythonCode.String()
+	pythonCode.Reset()
+	pythonCode.WriteString(imports.String())
+	pythonCode.WriteString(functions.String())
+	pythonCode.WriteString(originalPythonCode)
+
 }
 
-func appendGenericFunctions(code *strings.Builder, stringFeatures []string, floatFeatures []string, integerFeatures []string) {
+func appendFunctions(imports, functions *strings.Builder, parser FileParser, stringFeatures []string, floatFeatures []string, integerFeatures []string) {
 	/* appendFunctions - Adds all of the functions for generic models & imports
 	   @Params code - Current code pointer
 	   @Params features - All of the string arrays of features
 	*/
 
 	if len(stringFeatures) > 0 {
-		addCode(code, "from sklearn.preprocessing import LabelEncoder", 0)
-		addCode(code, "", 0)
-		generateEncodeFunction(code)
+		parser.ParseRawCode("label_encode.py", imports, functions)
 	}
 
 	if len(floatFeatures) > 0 {
@@ -74,16 +78,6 @@ func appendGenericFunctions(code *strings.Builder, stringFeatures []string, floa
 		log.Println("Integer features detected")
 	}
 
-}
-
-func generateEncodeFunction(code *strings.Builder) {
-	/* generateEncodeFunction - Generates Python code for encoding a string feature into numerical representation.
-	   @Param code - Pointer to the string builder for adding code
-	*/
-	addCode(code, "def label_encode(df, features):", 0)
-	addCode(code, "for feat in features:", 1)
-	addCode(code, "le = LabelEncoder()", 2)
-	addCode(code, "df[feat] = le.fit_transform(df[feat])", 2)
 }
 
 func addQuotes(features []string) []string {

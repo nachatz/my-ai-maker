@@ -1,24 +1,42 @@
 package gen
 
 import (
+	"errors"
 	"os"
+	"strings"
 )
 
 type FileParser struct {
 	Language string
 }
 
-func (fp *FileParser) ParseRawCode(file string) string {
-	/* ParseRawCode - Reads in a code file and returns as a raw string
-	   @Param file - file to be read in
-	   @Return string - Raw code as a string
-	*/
+func (fp *FileParser) ParseRawCode(file string, imports, source *strings.Builder) error {
+	var importLines strings.Builder
+	var sourceLines strings.Builder
+	isImportBlock := true
 	content, err := os.ReadFile("internal/gen/" + fp.Language + "/" + file)
 
 	if err != nil {
-		return "Failed to parse data!"
+		return errors.New("failed to parse data file")
 	}
 
 	code := string(content)
-	return code
+	parts := strings.Split(code, "\n")
+
+	for _, line := range parts {
+		if strings.HasPrefix(line, "import ") || strings.HasPrefix(line, "from ") {
+			isImportBlock = true
+		}
+		if isImportBlock {
+			importLines.WriteString(line + "\n")
+		} else {
+			sourceLines.WriteString(line + "\n")
+		}
+	}
+
+	// Append the import and source code to the provided strings.Builder
+	imports.WriteString(importLines.String())
+	source.WriteString(sourceLines.String())
+
+	return nil
 }

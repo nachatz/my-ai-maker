@@ -22,8 +22,12 @@ func GeneratePythonCode(
 	   @Return string - Generated Python code
 	*/
 
+	parser := &FileParser{
+		Language: featureRequest.Language,
+	}
+
 	// Generic imports
-	addCode(pythonCode, "import pandas as pd", 0)
+	addCode(pythonCode, parser.ParseRawCode("generic_imports.py"), 0)
 
 	// Functions
 	appendGenericFunctions(pythonCode, stringFeatures, integerFeatures, floatFeatures)

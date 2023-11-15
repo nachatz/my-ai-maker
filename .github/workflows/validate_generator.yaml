@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-    test-golang:
+  test-generator:
     runs-on: ubuntu-latest
 
     steps:

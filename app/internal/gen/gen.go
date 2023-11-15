@@ -14,26 +14,32 @@ func GenerateCode(featureRequest models.FeatureRequest) (string, error) {
 	   @Param FeatureRequest - Interface of metadata for feature data
 	   @Return string - Generated code for stipulated language
 	*/
-	var code strings.Builder
-	stringFeatures, integerFeatures, floatFeatures, booleanFeatures := []string{}, []string{}, []string{}, []string{}
-	features := featureRequest.Features
-	language := featureRequest.Language
-	library := featureRequest.Library
+	var source, functions, imports *strings.Builder = new(strings.Builder), new(strings.Builder), new(strings.Builder)
+	var features, language, library = featureRequest.Features, featureRequest.Language, featureRequest.Library
 
 	log.Printf("Generating code for %s using %s", language, library)
-	utils.ExtractFeatures(features, &stringFeatures, &integerFeatures, &floatFeatures, &booleanFeatures)
-
-	if language == "python" {
-		GeneratePythonCode(
-			featureRequest,
-			&code,
-			stringFeatures,
-			integerFeatures,
-			floatFeatures,
-			booleanFeatures,
-		)
-		return code.String(), nil
+	gen := models.Gen{
+		FeatureRequest: featureRequest,
+		Source:         source,
+		Functions:      functions,
+		Imports:        imports,
+		Features: models.Features{
+			StringFeatures:  []string{},
+			IntegerFeatures: []string{},
+			FloatFeatures:   []string{},
+			BooleanFeatures: []string{},
+		},
 	}
 
-	return "", errors.New("language not implemented")
+	utils.ExtractFeatures(features, &gen.Features)
+
+	switch language {
+	case "python":
+		GeneratePythonCode(&gen)
+	default:
+		return "", errors.New("language not implemented")
+	}
+
+	return source.String(), nil
+
 }

@@ -40,7 +40,7 @@ func FeatureHandler(w http.ResponseWriter, r *http.Request) {
 	// Process the JSON features and data types
 	code, err := processFeatures(featureRequest)
 	if err != nil {
-		response.Message = "Failed to process features"
+		response.Message = "Failed to process features: " + err.Error()
 		response.StatusCode = http.StatusInternalServerError
 		utils.WriteResponse(w, response)
 		return

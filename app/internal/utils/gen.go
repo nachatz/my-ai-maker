@@ -1,16 +1,34 @@
 package utils
 
-func ExtractFeatures(features map[string]string, stringFeatures, integerFeatures, floatFeatures *[]string, booleanFeatures *[]string) {
+import "github.com/nachatz/my-ai-maker/app/internal/models"
+
+func ExtractFeatures(features map[string]string, code *models.Features) {
+	/* ExtractFeatures - Extracts features from a map and populates the respective fields in a Features object.
+	   @Param features: A map of feature names with their corresponding data types.
+	   @Param code: A Features object to store the extracted features based on their data types.
+	*/
 	for feature, dataType := range features {
 		switch dataType {
 		case "string":
-			*stringFeatures = append(*stringFeatures, feature)
+			code.StringFeatures = append(code.StringFeatures, feature)
 		case "integer":
-			*integerFeatures = append(*integerFeatures, feature)
+			code.IntegerFeatures = append(code.IntegerFeatures, feature)
 		case "float":
-			*floatFeatures = append(*floatFeatures, feature)
+			code.FloatFeatures = append(code.FloatFeatures, feature)
 		case "boolean":
-			*booleanFeatures = append(*booleanFeatures, feature)
+			code.BooleanFeatures = append(code.BooleanFeatures, feature)
 		}
 	}
+}
+
+func FinalizeCode(gen *models.Gen) {
+	/* FinalizeCode - Appends the imports, functions, and original source code to create the final code in a Gen object.
+	   @Param gen: A Gen object containing the source, imports, functions, and features.
+	*/
+	originalSource := gen.Source.String()
+	gen.Source.Reset()
+	gen.Source.WriteString(gen.Imports.String())
+	gen.Source.WriteString(gen.Functions.String())
+	gen.Source.WriteString(originalSource)
+	gen.Source.WriteString("\n")
 }

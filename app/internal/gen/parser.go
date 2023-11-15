@@ -11,9 +11,13 @@ type FileParser struct {
 }
 
 func (fp *FileParser) ParseRawCode(file string, imports, source *strings.Builder) error {
+	/* ParseRawCode - Reads in a python code file. Needs to be extended to Go
+	   @Param file - name of the file to be read
+	   @Param imports - memory address of the imports string builder
+	   @Param source - memory address of the source file for this set of imports
+	*/
 	var importLines strings.Builder
 	var sourceLines strings.Builder
-	isImportBlock := true
 	content, err := os.ReadFile("internal/gen/" + fp.Language + "/" + file)
 
 	if err != nil {
@@ -24,6 +28,7 @@ func (fp *FileParser) ParseRawCode(file string, imports, source *strings.Builder
 	parts := strings.Split(code, "\n")
 
 	for _, line := range parts {
+		isImportBlock := false
 		if strings.HasPrefix(line, "import ") || strings.HasPrefix(line, "from ") {
 			isImportBlock = true
 		}

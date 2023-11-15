@@ -23,6 +23,9 @@ tidy:
 fmt:
 	$(GOFMT) ./...
 
+test:
+	$(GOCMD) test ./...
+
 clean:
 	@echo "Cleaning up..."
 	@rm -f go.mod

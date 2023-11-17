@@ -28,6 +28,7 @@ func FinalizeCode(gen *models.Gen) {
 	originalSource := gen.Source.String()
 	gen.Source.Reset()
 	gen.Source.WriteString(gen.Imports.String())
+	gen.Source.WriteString("\n")
 	gen.Source.WriteString(gen.Functions.String())
 	gen.Source.WriteString(originalSource)
 	gen.Source.WriteString("\n")

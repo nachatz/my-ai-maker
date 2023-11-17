@@ -16,6 +16,7 @@ func GenerateCode(featureRequest models.FeatureRequest) (string, error) {
 	*/
 	var source, functions, imports *strings.Builder = new(strings.Builder), new(strings.Builder), new(strings.Builder)
 	var features, language, library = featureRequest.Features, featureRequest.Language, featureRequest.Library
+	var err error = nil
 
 	log.Printf("Generating code for %s using %s", language, library)
 	gen := models.Gen{
@@ -35,11 +36,11 @@ func GenerateCode(featureRequest models.FeatureRequest) (string, error) {
 
 	switch language {
 	case "python":
-		GeneratePythonCode(&gen)
+		err = GeneratePythonCode(&gen)
 	default:
 		return "", errors.New("language not implemented")
 	}
 
-	return source.String(), nil
+	return source.String(), err
 
 }

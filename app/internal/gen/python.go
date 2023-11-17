@@ -21,7 +21,7 @@ func GeneratePythonCode(gen *models.Gen) {
 	parser.ParseRawCode("generics.py", gen.Imports, gen.Source)
 
 	// Functions
-	appendFunctions(parser, gen.Imports, gen.Functions, gen.Features)
+	appendFunctions(parser, gen, gen.Features)
 
 	// Functional code
 
@@ -31,7 +31,7 @@ func GeneratePythonCode(gen *models.Gen) {
 
 }
 
-func appendFunctions(parser FileParser, imports *strings.Builder, functions *strings.Builder, features models.Features) {
+func appendFunctions(parser FileParser, gen *models.Gen, features models.Features) {
 	/* appendFunctions - Adds all of the functions for generic models & imports
 	   @Param parser - FileParser that reads in python code
 	   @Param imports - Memory location of the imports
@@ -39,8 +39,13 @@ func appendFunctions(parser FileParser, imports *strings.Builder, functions *str
 	   @Param features - All of the string arrays of features
 	*/
 
+	appendInvocation := func(file string, variable string, indent int) {
+		parser.ParseRawCode(file, gen.Imports, gen.Functions)
+		addCode(gen.Source, strings.Replace(file, ".py", "("+variable+")", -1), indent)
+	}
+
 	if len(features.StringFeatures) > 0 {
-		parser.ParseRawCode("label_encode.py", imports, functions)
+		appendInvocation("label_encode.py", "df", 1)
 	}
 
 	if len(features.FloatFeatures) > 0 {

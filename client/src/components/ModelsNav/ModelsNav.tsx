@@ -98,7 +98,7 @@ export default function ModelsNav({
                 </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="flex items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100"
                   href="/creation"
                 >
@@ -113,7 +113,7 @@ export default function ModelsNav({
                     <path d="M8 0.5a.5.5 0 0 1 .5.5V7h6.5a.5.5 0 0 1 0 1H8v6.5a.5.5 0 0 1-1 0V8H0.5a.5.5 0 0 1 0-1H7V0.5a.5.5 0 0 1 .5-.5z" />
                   </svg>
                   New Model
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

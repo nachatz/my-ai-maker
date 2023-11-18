@@ -5,7 +5,7 @@ import geometry from "~/../public/photo/geometry.jpg";
 
 export default function ModelIntake() {
   const [stage, setStage] = useState(0);
-  const [view, setView] = useState([<MetadataIntake />]);
+  const [view, setView] = useState([<MetadataIntake key={"intake"}/>]);
 
   return (
     <div className="mx-auto mt-10 max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">

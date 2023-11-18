@@ -18,6 +18,7 @@ type Config struct {
 	CorsOrigins []string `yaml:"cors_origins"`
 	IssuerUrl   string   `yaml:"issuer_url"`
 	Audience    string   `yaml:"audience"`
+	Dev         bool
 	Auth        struct {
 		ClientID     string `yaml:"client_id"`
 		ClientSecret string `yaml:"client_secret"`

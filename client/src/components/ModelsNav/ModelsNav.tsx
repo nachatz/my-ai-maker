@@ -10,11 +10,15 @@ import Link from "next/link";
 export default function ModelsNav({
   profile,
   isOpen,
+  view,
   setIsOpen,
+  setView,
 }: {
   profile: Session["user"];
   isOpen: boolean;
+  view: string;
   setIsOpen: (isOpen: boolean) => void;
+  setView: (view: string) => void;
 }) {
   useEffect(() => {
     function handleWindowResize() {
@@ -38,7 +42,7 @@ export default function ModelsNav({
         <div
           id="application-sidebar"
           className={`hs-overlay scrollbar-y fixed bottom-0 left-0 top-12 w-64 transform overflow-y-auto rounded-r-xl border-r border-gray-200 bg-white pb-10 pt-7 shadow-2xl transition-all duration-1000 ${
-            isOpen ? "lg:translate-x-0" : "-translate-x-full"
+            isOpen ? "z-20 lg:translate-x-0" : "z-[-1] -translate-x-full"
           }`}
         >
           <div className="px-6">
@@ -57,24 +61,8 @@ export default function ModelsNav({
           >
             <ul className="space-y-1.5">
               <li>
-                <p className="flex cursor-default items-center gap-x-3.5 rounded-md bg-gray-100 px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100  ">
-                  <svg
-                    className="h-3.5 w-3.5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"></path>
-                    <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z"></path>
-                  </svg>
-                  MyModels
-                </p>
-              </li>{" "}
-              <li>
                 <Link
-                  className="flex items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100  "
+                  className="flex items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100"
                   href="/"
                 >
                   <svg
@@ -97,10 +85,31 @@ export default function ModelsNav({
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  className="flex items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100"
-                  href="/creation"
+              <li onClick={() => setView("current")}>
+                <p
+                  className={`flex cursor-pointer items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100 ${
+                    view === "current" ? "bg-gray-100" : ""
+                  }`}
+                >
+                  <svg
+                    className="h-3.5 w-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"></path>
+                    <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z"></path>
+                  </svg>
+                  MyModels
+                </p>
+              </li>{" "}
+              <li onClick={() => setView("new")}>
+                <p
+                  className={`flex cursor-pointer items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100 ${
+                    view === "new" ? "bg-gray-100" : ""
+                  }`}
                 >
                   <svg
                     className="h-3.5 w-3.5"
@@ -113,7 +122,7 @@ export default function ModelsNav({
                     <path d="M8 0.5a.5.5 0 0 1 .5.5V7h6.5a.5.5 0 0 1 0 1H8v6.5a.5.5 0 0 1-1 0V8H0.5a.5.5 0 0 1 0-1H7V0.5a.5.5 0 0 1 .5-.5z" />
                   </svg>
                   New Model
-                </Link>
+                </p>
               </li>
             </ul>
           </nav>

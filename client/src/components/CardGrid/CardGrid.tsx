@@ -16,10 +16,12 @@ export default function CardGrid({ cards }: CardArray) {
             key={index}
             variants={{
               hidden: {
+                y: "-100vh",
                 opacity: 0,
                 scale: 0.75,
               },
               visible: {
+                y: 0,
                 opacity: 1,
                 scale: 1,
                 transition: {
@@ -27,11 +29,18 @@ export default function CardGrid({ cards }: CardArray) {
                   duration: 1,
                 },
               },
+              exit: {
+                y: "100vh",
+                opacity: 0,
+                scale: 0.75,
+                transition: { duration: 1.5, ease: "easeInOut" },
+              },
             }}
             initial="hidden"
             animate="visible"
+            exit="exit"
             onAnimationComplete={() => setAnimationComplete(true)}
-            className={animationComplete ? "z-1" : "z-[-1]"}  
+            className={animationComplete ? "z-[1]" : "z-[-1]"}
           >
             <Card {...card} />
           </motion.div>

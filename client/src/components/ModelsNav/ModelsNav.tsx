@@ -100,7 +100,7 @@ export default function ModelsNav({
               <li>
                 <a
                   className="flex items-center gap-x-3.5 rounded-md px-2.5 py-2 text-sm text-slate-700 hover:bg-gray-100"
-                  href=""
+                  href="/creation"
                 >
                   <svg
                     className="h-3.5 w-3.5"

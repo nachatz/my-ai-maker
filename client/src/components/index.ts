@@ -14,5 +14,6 @@ export { default as Searchbar } from "./Searchbar/Searchbar";
 export { default as Sections } from "./Sections/Sections";
 export { default as Stats } from "./Stats/Stats";
 export { default as ModelsNav } from "./ModelsNav/ModelsNav";
+export { default as ModelIntake } from "./ModelIntake/ModelIntake";
 export { default as RouteHeader} from "./RouteHeader/RouteHeader";
 export { default as LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";

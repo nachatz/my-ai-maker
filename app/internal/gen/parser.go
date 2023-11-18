@@ -2,7 +2,6 @@ package gen
 
 import (
 	"errors"
-	"log"
 	"os"
 	"strings"
 )
@@ -19,11 +18,26 @@ func (fp *FileParser) ParseRawCode(file string, imports, source *strings.Builder
 	*/
 	var importLines strings.Builder
 	var sourceLines strings.Builder
-	log.Print("Reading in " + "internal/gen/" + fp.Language + "/" + file)
-	originalWD, _ := os.Getwd()
-	log.Print("owd: " + originalWD)
-	content, err := os.ReadFile("internal/gen/" + fp.Language + "/" + file)
 
+	// Update working directory
+	originalWD, err := os.Getwd()
+	if err != nil {
+		return errors.New("failed to load working directory")
+	}
+
+	if err := os.Chdir("../"); err != nil {
+		return errors.New("failed to set new working directory")
+	}
+
+	defer func() error {
+		if err := os.Chdir(originalWD); err != nil {
+			return errors.New("failed to reset working directory :(")
+		}
+		return nil
+	}()
+
+	// Load and parse
+	content, err := os.ReadFile("internal/gen/" + fp.Language + "/" + file)
 	if err != nil {
 		return errors.New("failed to parse data file")
 	}

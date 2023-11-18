@@ -2,6 +2,7 @@ package gen
 
 import (
 	"errors"
+	"log"
 	"os"
 	"strings"
 )
@@ -18,6 +19,7 @@ func (fp *FileParser) ParseRawCode(file string, imports, source *strings.Builder
 	*/
 	var importLines strings.Builder
 	var sourceLines strings.Builder
+	log.Print("Reading in " + "internal/gen/" + fp.Language + "/" + file)
 	content, err := os.ReadFile("internal/gen/" + fp.Language + "/" + file)
 
 	if err != nil {

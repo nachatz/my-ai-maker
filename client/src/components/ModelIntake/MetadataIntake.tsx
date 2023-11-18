@@ -1,35 +1,42 @@
+import Select from "react-select";
+import { customStyles } from "./dropdown-options";
+
 export default function MetadataIntake() {
+  const options = [{ value: "linear regression", label: "Linear Regression" }];
+
   return (
     <div>
       <div className="space-y-2">
         <label
           htmlFor="af-submit-app-project-name"
-          className="mt-2.5 inline-block text-sm font-medium text-gray-800 "
+          className="mt-2.5 inline-block text-sm font-medium text-gray-800"
         >
           Model Title*
         </label>
         <input
           id="af-submit-app-project-name"
           type="text"
-          className="block w-full rounded-lg border-2 border-gray-300 px-3 py-2 pe-11 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
+          autoComplete="off"
+          className="w-full cursor-text rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm hover:border-black"
           placeholder="Enter project name"
         />
       </div>
       <div className="space-y-2">
         <label
           htmlFor="af-submit-app-category"
-          className="mt-2.5 inline-block text-sm font-medium text-gray-800 "
+          className="mt-2.5 inline-block text-sm font-medium text-gray-800"
         >
           Model Type*
         </label>
-
-        <select
+        <Select
+          className="border-1 rounded-lg border-gray-300 shadow-sm"
           id="af-submit-app-category"
-          className="block w-full cursor-pointer rounded-lg border-2 border-gray-200 px-3 py-2 pe-9 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
-        >
-          <option className="rounded-lg">Select a model</option>
-          <option>Linear Regression</option>
-        </select>
+          isClearable={true}
+          isSearchable={true}
+          isLoading={false}
+          styles={customStyles}
+          options={options}
+        />
       </div>
       <div className="space-y-2">
         <label
@@ -40,7 +47,7 @@ export default function MetadataIntake() {
         </label>
         <textarea
           id="af-submit-app-description"
-          className="block w-full resize-none rounded-lg border-2 border-gray-200 px-3 py-2 text-sm shadow-md focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
+          className="w-full cursor-text resize-none rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm hover:border-black"
           rows={6}
           placeholder="A succinct explanation of your model"
         ></textarea>
@@ -55,7 +62,7 @@ export default function MetadataIntake() {
 
         <label
           htmlFor="af-submit-app-upload-images"
-          className="group block cursor-pointer rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 p-4 text-center focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 sm:p-7"
+          className="group block rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 p-4 text-center sm:p-7"
         >
           <input
             id="af-submit-app-upload-images"

@@ -3,7 +3,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/nachatz/my-ai-maker/app/internal/api"
@@ -18,22 +17,9 @@ func ModelsHandler(w http.ResponseWriter, r *http.Request) {
 	*/
 	var response models.Response
 
-	modelList := make([]models.ModelInfo, len(api.AvailableModels))
-	for i, model := range api.AvailableModels {
-		modelList[i] = models.ModelInfo{
-			Name:     model.Name,
-			Language: model.Language,
-			Library:  model.Library,
-		}
-	}
+	response.Message = api.AvailableModels
+	response.StatusCode = http.StatusOK
 
 	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(modelList); err != nil {
-		response.Message = "Failed to encode model list to JSON"
-		response.StatusCode = http.StatusInternalServerError
-		utils.WriteResponse(w, response)
-		return
-	}
-
-	response.StatusCode = http.StatusOK
+	utils.WriteResponse(w, response)
 }

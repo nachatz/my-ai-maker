@@ -5,6 +5,6 @@ type Response struct {
 	   @Field Message - The message associated with the response.
 	   @Field StatusCode - The status code of the response.
 	*/
-	Message    string `json:"message"`
+	Message    interface{} `json:"message"`
 	StatusCode int
 }

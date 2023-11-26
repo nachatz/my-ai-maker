@@ -1,11 +1,12 @@
-import { MouseEvent, useState } from "react";
+import { type MouseEvent, useState } from "react";
 import {
   DataGrid,
-  GridColDef,
-  GridRowsProp,
   GridToolbar,
+  type GridColDef,
+  type GridRowsProp,
+  type GridRowModel,
 } from "@mui/x-data-grid";
-import { Row } from "~/types";
+import { type Row } from "~/types";
 
 const columns: GridColDef[] = [
   { field: "feature", headerName: "Feature", width: 300, editable: true },
@@ -24,11 +25,13 @@ export default function FeatureIntake() {
   const [newFeature, setNewFeature] = useState("");
 
   const handleAddFeature = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     // (1) Unique ids in the current data set
     // (2) Unique ids in the provided data intake
     // (3) Resetting the new data features
     // (4) Reset input
-    e.preventDefault();
+    // grid data types don't always navigate types properly. MUI should resolve
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     const currentIds = new Set(features.map((f) => f.id));
     const uniqueIds = [
       ...new Set(
@@ -53,7 +56,9 @@ export default function FeatureIntake() {
 
   const handleCellEditStop = (newr: Row, oldr: Row) => {
     // return the old row if the new row changes to a already existing feature
-    const currentIds = new Set(features.map((f) => f.id));
+    // grid data types don't always navigate types properly. MUI should resolve
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    const currentIds = new Set(features.map((f: GridRowModel) => f.id));
     return newr.feature !== oldr.feature && currentIds.has(newr.feature)
       ? oldr
       : (() => (
@@ -107,8 +112,11 @@ export default function FeatureIntake() {
           disableColumnMenu={true}
           rows={features}
           columns={columns}
-          onProcessRowUpdateError={(error) => console.log(error)}
-          processRowUpdate={(newr, oldr) => handleCellEditStop(newr, oldr)}
+          // error of type any, no beuno. they should fix that. needs update toast
+          // onProcessRowUpdateError={(error: any) => console.log(error)}
+          processRowUpdate={(newr: Row, oldr: Row) =>
+            handleCellEditStop(newr, oldr)
+          }
           slots={{ toolbar: GridToolbar }}
           slotProps={{
             toolbar: {

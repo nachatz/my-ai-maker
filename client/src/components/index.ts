@@ -1,4 +1,5 @@
 export { default as Banner } from "./Banner/Banner";
+export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export { default as HomeContent } from "./Content/Home/Content";
 export { default as DocsContent } from "./Content/Docs/Content";
 export { default as Faq } from "./Faq/Faq";
@@ -15,5 +16,5 @@ export { default as Sections } from "./Sections/Sections";
 export { default as Stats } from "./Stats/Stats";
 export { default as ModelsNav } from "./ModelsNav/ModelsNav";
 export { default as ModelIntake } from "./ModelIntake/ModelIntake";
-export { default as RouteHeader} from "./RouteHeader/RouteHeader";
+export { default as RouteHeader } from "./RouteHeader/RouteHeader";
 export { default as LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";

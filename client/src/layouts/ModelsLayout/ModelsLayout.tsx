@@ -34,7 +34,7 @@ export default function ModelsLayout() {
     void push("/");
     return null;
   }
-  
+
   return (
     <div className="flex flex-col">
       <RouteHeader isOpen={isOpen} setIsOpen={setIsOpen} />

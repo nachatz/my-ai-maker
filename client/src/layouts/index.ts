@@ -1,5 +1,4 @@
 export { default as CoreLayout } from "./CoreLayout/CoreLayout";
-export { default as CreationLayout } from "./CreationLayout/CreationLayout";
 export { default as DocsLayout } from "./DocsLayout/DocsLayout";
 export { default as PageNotFoundLayout } from "./PageNotFoundLayout/PageNotFoundLayout";
 export { default as LandingLayout } from "./LandingLayout/LandingLayout";

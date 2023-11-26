@@ -5,7 +5,7 @@ interface Option {
   label: string;
 }
 
-export const customStyles: StylesConfig<Option, false> = {
+export const customDropdown: StylesConfig<Option, false> = {
   option: (provided, state) => {
     const backgroundColor = state.isFocused ? "#e0e0e0" : "inherit";
     const color = state.isFocused ? "black" : "inherit";

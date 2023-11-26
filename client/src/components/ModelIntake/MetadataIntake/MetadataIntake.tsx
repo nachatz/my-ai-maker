@@ -1,11 +1,19 @@
 import Select from "react-select";
-import { customStyles } from "./dropdown-options";
+import { customDropdown } from "./dropdown-options";
 
 export default function MetadataIntake() {
   const options = [{ value: "linear regression", label: "Linear Regression" }];
 
   return (
-    <div>
+    <>
+      <div className="flex items-center py-6 text-sm uppercase text-gray-400 before:me-6 before:flex-[1_1_0%] before:border-t after:ms-6 after:flex-[1_1_0%] after:border-t ">
+        Metadata Intake
+      </div>
+      <p className="text-sm text-gray-400 before:me-6 before:flex-[1_1_0%] before:border-t after:ms-6 after:flex-[1_1_0%] after:border-t ">
+        You can double click to modify any of your features. Add in specific
+        encodings, transformations, data types, etc. By default, we use our
+        recommended selections
+      </p>
       <div className="space-y-2">
         <label
           htmlFor="af-submit-app-project-name"
@@ -34,7 +42,7 @@ export default function MetadataIntake() {
           isClearable={true}
           isSearchable={true}
           isLoading={false}
-          styles={customStyles}
+          styles={customDropdown}
           options={options}
         />
       </div>
@@ -95,6 +103,6 @@ export default function MetadataIntake() {
           </span>
         </label>
       </div>
-    </div>
+    </>
   );
 }

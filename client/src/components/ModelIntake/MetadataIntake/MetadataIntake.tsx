@@ -10,7 +10,10 @@ export default function MetadataIntake() {
     ModelsService.useAvailableModels();
 
   if (error) return <p>{error.message}</p>;
-  if (!isLoading && !data) void router.push("/");
+  if (!isLoading && !data) {
+    console.log(data)
+    console.log(error)
+  }
 
   const options = data
     ? data.map((model: Model) => ({

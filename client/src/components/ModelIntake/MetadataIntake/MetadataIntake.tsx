@@ -9,7 +9,6 @@ export default function MetadataIntake() {
   const { data, error, isLoading }: Fetch<Model> =
     ModelsService.useAvailableModels();
 
-  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
   if (!isLoading && !data) void router.push("/");
 

@@ -33,6 +33,7 @@
     "react-dom": "18.2.0",
     "react-select": "^5.8.0",
     "superjson": "^1.13.1",
+    "swr": "^2.2.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {

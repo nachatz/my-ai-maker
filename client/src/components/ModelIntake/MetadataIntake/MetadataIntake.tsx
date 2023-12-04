@@ -1,8 +1,24 @@
-import Select from "react-select";
+import { useRouter } from "next/router";
 import { customDropdown } from "./dropdown-options";
+import { ModelsService } from "~/services";
+import type { Fetch, Model } from "~/types";
+import Select from "react-select";
 
 export default function MetadataIntake() {
-  const options = [{ value: "linear regression", label: "Linear Regression" }];
+  const router = useRouter();
+  const { data, error, isLoading }: Fetch<Model> =
+    ModelsService.useAvailableModels();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
+  if (!isLoading && !data) void router.push("/");
+
+  const options = data
+    ? data.map((model: Model) => ({
+        value: model.name.toLowerCase(),
+        label: model.name,
+      }))
+    : [];
 
   return (
     <>
@@ -39,9 +55,11 @@ export default function MetadataIntake() {
         <Select
           className="border-1 rounded-lg border-gray-300 shadow-sm"
           id="af-submit-app-category"
+          placeholder="Select a model type"
           isClearable={true}
           isSearchable={true}
-          isLoading={false}
+          isLoading={isLoading}
+          isDisabled={isLoading}
           styles={customDropdown}
           options={options}
         />

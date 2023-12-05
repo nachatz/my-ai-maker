@@ -25,7 +25,7 @@ export default async function middleware(req: NextRequest) {
 
   const responseData = (await response.json()) as AuthResponse;
 
-  if (!responseData.data || responseData === null || responseData === undefined) {
+  if (!responseData?.data) {
     url.pathname = `/`;
     return NextResponse.redirect(url);
   }

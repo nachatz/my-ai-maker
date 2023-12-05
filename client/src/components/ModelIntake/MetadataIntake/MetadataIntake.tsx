@@ -6,11 +6,14 @@ import Select from "react-select";
 
 export default function MetadataIntake() {
   const router = useRouter();
-  const { data, error, isLoading }: Fetch<Model> =
-    ModelsService.useAvailableModels();
+  const data: Array<Model> = [];
+  const error = null;
+  const isLoading = false;
+  // const { data, error, isLoading }: Fetch<Model> =
+  //   ModelsService.useAvailableModels();
 
-  if (error) return <p>{error.message}</p>;
-  if (!isLoading && !data) void router.push("/");
+  // if (error) return <p>{error.message}</p>;
+  // if (!isLoading && !data) void router.push("/");
 
   const options = data
     ? data.map((model: Model) => ({

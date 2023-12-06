@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 interface AuthResponse {
-  data: {
+  data?: {
     auth: boolean;
   };
 }
@@ -25,15 +25,16 @@ export default async function middleware(req: NextRequest) {
     }
 
     const responseData = (await response.json()) as AuthResponse;
-    const { auth } = responseData.data;
 
-    return !auth ? NextResponse.redirect(url) : NextResponse.next();
+    if (responseData.data && responseData.data.auth !== undefined) {
+      const { auth } = responseData.data;
+      return !auth ? NextResponse.redirect(url) : NextResponse.next();
+    } else return NextResponse.error();
   } catch (error) {
-    console.error("Error in middleware:", error);
     return NextResponse.error();
   }
 }
 
 export const config = {
-  matcher: ["/models", "/creation"],
+  matcher: ["/models"],
 };

@@ -31,7 +31,7 @@ export default function ModelsLayout() {
 
   if (status === "loading") return <div>Loading...</div>;
   if (!data) {
-    void push("/");
+    void push(`/auth/login`);
     return null;
   }
 

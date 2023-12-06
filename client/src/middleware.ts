@@ -8,25 +8,30 @@ interface AuthResponse {
 }
 
 export default async function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone() as URL;
-  const params = new URLSearchParams();
-  params.set("callbackUrl", url.toString());
-  url.search = params.toString();
-  url.pathname = `/auth/login`;
+  try {
+    const url = req.nextUrl.clone() as URL;
+    const params = new URLSearchParams();
+    params.set("callbackUrl", url.toString());
+    url.search = params.toString();
+    url.pathname = `/auth/login`;
 
-  const response = await fetch(`${url.origin}/api/authSSR`, {
-    headers: req.headers,
-  });
+    const response = await fetch(`${url.origin}/api/authSSR`, {
+      headers: req.headers,
+    });
 
-  if (!response.ok) {
-    url.pathname = `/`;
-    return NextResponse.redirect(url);
+    if (!response.ok) {
+      url.pathname = `/`;
+      return NextResponse.redirect(url);
+    }
+
+    const responseData = (await response.json()) as AuthResponse;
+    const { auth } = responseData.data;
+
+    return !auth ? NextResponse.redirect(url) : NextResponse.next();
+  } catch (error) {
+    console.error("Error in middleware:", error);
+    return NextResponse.error();
   }
-
-  const responseData = (await response.json()) as AuthResponse;
-  const { auth } = responseData.data;
-
-  return !auth ? NextResponse.redirect(url) : NextResponse.next();
 }
 
 export const config = {

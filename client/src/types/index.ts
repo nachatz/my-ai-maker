@@ -17,5 +17,5 @@ export type { Row, RowArray } from "./components/ModelIntake";
 export type { StatsProps } from "./components/Stats";
 
 // API
-export type { Fetch, FetchError } from "./api/fetch";
+export type { AiMakerResponse, Fetch, FetchError } from "./api/fetch";
 export type { Model } from "./api/model";

@@ -1,15 +1,16 @@
 import useSWR from "swr";
-import type { Fetch, FetchError, Model } from "~/types";
+import type { AiMakerResponse, Fetch, FetchError, Model } from "~/types";
 import { endpoints } from "~/constants/endpoints";
-import { fetcher } from "~/utils/fetcher";
+import { get } from "~/utils/fetcher";
+
 
 const useAvailableModels = (): Fetch<Model> => {
-  const { data, error, isLoading } = useSWR<Fetch<Model>, FetchError>(
+  const { data, error, isLoading } = useSWR<AiMakerResponse<Model[]>, FetchError>(
     endpoints.models.supported,
-    (url: RequestInfo) => fetcher(url, "GET"),
+    get
   );
 
-  return { data: data?.data, error, isLoading };
+  return { data: data?.message, error, isLoading };
 };
 
 export const ModelsService = {

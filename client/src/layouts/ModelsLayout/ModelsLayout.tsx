@@ -25,22 +25,17 @@ const mockedData = [
 
 export default function ModelsLayout() {
   const { data, status } = useSession();
-  const { push } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState("current");
 
   if (status === "loading") return <div>Loading...</div>;
-  if (!data) {
-    void push("/");
-    return null;
-  }
 
   return (
     <div className="flex flex-col">
       <RouteHeader isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="">
         <ModelsNav
-          profile={data.user}
+          profile={data!.user}
           isOpen={isOpen}
           view={view}
           setIsOpen={setIsOpen}

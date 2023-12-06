@@ -25,9 +25,9 @@ export default async function middleware(req: NextRequest) {
     }
 
     const responseData = (await response.json()) as AuthResponse;
+    const auth = responseData.data?.auth;
 
-    if (responseData.data && responseData.data.auth !== undefined) {
-      const { auth } = responseData.data;
+    if (auth !== undefined) {
       return !auth ? NextResponse.redirect(url) : NextResponse.next();
     } else return NextResponse.error();
   } catch (error) {
@@ -36,5 +36,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/models"],
+  matcher: ["/models", "/creation"],
 };

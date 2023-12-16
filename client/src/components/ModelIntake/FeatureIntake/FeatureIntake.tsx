@@ -3,10 +3,9 @@ import {
   DataGrid,
   GridToolbar,
   type GridColDef,
-  type GridRowsProp,
   type GridRowModel,
 } from "@mui/x-data-grid";
-import { type Row } from "~/types";
+import type { Row } from "~/types";
 
 const columns: GridColDef[] = [
   { field: "feature", headerName: "Feature", width: 300, editable: true },
@@ -20,10 +19,21 @@ const columns: GridColDef[] = [
   },
 ];
 
-export default function FeatureIntake() {
-  const [features, setFeatures] = useState<GridRowsProp>([]);
+export default function FeatureIntake({
+  rows,
+  setRows,
+}: {
+  rows: Row[];
+  setRows: (state: Row[]) => void;
+}) {
   const [newFeature, setNewFeature] = useState("");
 
+  /**
+   * Handles the addition of a feature.
+   *
+   * @param {MouseEvent<HTMLButtonElement>} e - The button click event.
+   * @return {void} This function does not return anything.
+   */
   const handleAddFeature = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // (1) Unique ids in the current data set
@@ -32,7 +42,7 @@ export default function FeatureIntake() {
     // (4) Reset input
     // grid data types don't always navigate types properly. MUI should resolve
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const currentIds = new Set(features.map((f) => f.id));
+    const currentIds = new Set(rows.map((f) => f.id));
     const uniqueIds = [
       ...new Set(
         newFeature
@@ -44,7 +54,8 @@ export default function FeatureIntake() {
     ];
 
     setNewFeature("");
-    setFeatures((prevFeatures) => [
+    // @ts-ignore
+    setRows((prevFeatures: Row[]) => [
       ...prevFeatures,
       ...uniqueIds.map((feature) => ({
         id: feature,
@@ -54,21 +65,30 @@ export default function FeatureIntake() {
     ]);
   };
 
+  /**
+   * Handles the event when cell editing is stopped.
+   *
+   * @param {Row} newr - The new row object after editing.
+   * @param {Row} oldr - The old row object before editing.
+   * @return {Row} - The updated row object after handling the event.
+   */
   const handleCellEditStop = (newr: Row, oldr: Row) => {
     // return the old row if the new row changes to a already existing feature
     // grid data types don't always navigate types properly. MUI should resolve
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const currentIds = new Set(features.map((f: GridRowModel) => f.id));
+    const currentIds = new Set(rows.map((f: GridRowModel) => f.id));
     return newr.feature !== oldr.feature && currentIds.has(newr.feature)
       ? oldr
-      : (() => (
-          setFeatures((prevFeatures) =>
-            prevFeatures.map((f) =>
-              f.id === oldr.id ? { ...newr, id: newr.feature } : f,
+      : ((() =>
+          (
+            // @ts-ignore
+            setRows((prevFeatures: Row[]) =>
+              prevFeatures.map((f: Row) =>
+                f.id === oldr.id ? { ...newr, id: newr.feature } : f,
+              ),
             ),
-          ),
-          newr
-        ))();
+            newr
+          ))() as Row[]);
   };
 
   return (
@@ -110,10 +130,11 @@ export default function FeatureIntake() {
           disableColumnSelector
           disableDensitySelector
           disableColumnMenu={true}
-          rows={features}
+          rows={rows}
           columns={columns}
           // error of type any, no beuno. they should fix that. needs update toast
           // onProcessRowUpdateError={(error: any) => console.log(error)}
+          // @ts-ignore
           processRowUpdate={(newr: Row, oldr: Row) =>
             handleCellEditStop(newr, oldr)
           }

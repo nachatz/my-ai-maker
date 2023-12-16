@@ -1,4 +1,4 @@
-import { Model } from "./model";
+import type { Model } from "./model";
 interface Fetch<T> {
   data?: T[];
   error?: FetchError;

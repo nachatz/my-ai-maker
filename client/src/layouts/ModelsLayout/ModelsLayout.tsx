@@ -8,7 +8,7 @@ const mockedData = [
   {
     title: "MyModel1",
     type: "feed forward",
-    description: "My sample model that does nothing xdd",
+    description: "My sample model that predicts markets",
     code: "print('hi')",
     icon: "global",
     color: "blue",
@@ -16,7 +16,7 @@ const mockedData = [
   {
     title: "MyModel2",
     type: "feed forward",
-    description: "My sample model2 that does nothing xdd",
+    description: "My sample model2 that predicts animal height",
     code: "print('hi')",
     icon: "variable",
     color: "black",

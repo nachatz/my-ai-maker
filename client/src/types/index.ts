@@ -13,7 +13,7 @@ export type {
 } from "./components/NavItem";
 export type { PricingProps } from "./components/Pricing";
 export type { SectionsProps } from "./components/Sections";
-export type { Row, RowArray } from "./components/ModelIntake";
+export type { Row, RowArray, ModelCreate } from "./components/ModelIntake";
 export type { StatsProps } from "./components/Stats";
 
 // API

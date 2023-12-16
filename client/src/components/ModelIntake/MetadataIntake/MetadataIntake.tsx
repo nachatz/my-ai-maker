@@ -1,23 +1,80 @@
 import { useRouter } from "next/router";
 import { customDropdown } from "./dropdown-options";
 import { ModelsService } from "~/services";
-import type { Fetch, Model } from "~/types";
+import type { Fetch, Model, ModelCreate } from "~/types";
 import Select from "react-select";
 
-export default function MetadataIntake() {
+export default function MetadataIntake({
+  model,
+  setModel,
+}: {
+  model: ModelCreate;
+  setModel: (state: ModelCreate) => void;
+}) {
+  // Variables
   const router = useRouter();
   const { data, error, isLoading }: Fetch<Model> =
     ModelsService.useAvailableModels();
 
+  // Model fetch results
   if (error) return <p>{error.message}</p>;
   if (!isLoading && !data) void router.push("/");
 
+  // Options for model type
   const options = data
     ? data.map((model: Model) => ({
         value: model.name.toLowerCase(),
         label: model.name,
       }))
     : [];
+  const selectedOption = options.find((opt) => opt.value === model.type);
+
+  // Functions and handlers
+
+  /**
+   * Handles the input change event.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>} event - The input change event.
+   * @param {string} value - value of model type
+   * @return {void}
+   */
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    valueKey: keyof ModelCreate,
+  ) => {
+    const newValue = event.target.value;
+    // vscode linter doesn't like this, but it is a valid typing
+    // @ts-ignore
+    setModel((prevModel) => {
+      return {
+        ...prevModel,
+        [valueKey]: newValue,
+      } as ModelCreate;
+    });
+  };
+
+  /**
+   * Handles the change event when the selected option is changed.
+   *
+   * @param {Object} selectedOption - The selected option object.
+   * @param {string} selectedOption.value - The value of the selected option.
+   * @param {string} selectedOption.label - The label of the selected option.
+   * @return {void} This function does not return anything.
+   */
+  const handleSelectedOptionChange = (
+    selectedOption: { value: string; label: string } | null,
+  ) => {
+    if (selectedOption) {
+      // vscode linter doesn't like this, but it is a valid typing
+      // @ts-ignore
+      setModel((prevModel) => {
+        return {
+          ...prevModel,
+          type: selectedOption.value,
+        } as ModelCreate;
+      });
+    }
+  };
 
   return (
     <>
@@ -42,6 +99,8 @@ export default function MetadataIntake() {
           autoComplete="off"
           className="w-full cursor-text rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm hover:border-black"
           placeholder="Enter project name"
+          value={model.title}
+          onChange={(e) => handleInputChange(e, "title")}
         />
       </div>
       <div className="space-y-2">
@@ -52,15 +111,17 @@ export default function MetadataIntake() {
           Model Type*
         </label>
         <Select
+          key={model.type}
           className="border-1 rounded-lg border-gray-300 shadow-sm"
           id="af-submit-app-category"
           placeholder="Select a model type"
-          isClearable={true}
           isSearchable={true}
           isLoading={isLoading}
           isDisabled={isLoading}
           styles={customDropdown}
           options={options}
+          value={selectedOption}
+          onChange={handleSelectedOptionChange}
         />
       </div>
       <div className="space-y-2">
@@ -68,13 +129,15 @@ export default function MetadataIntake() {
           htmlFor="af-submit-app-description"
           className="mt-2.5 inline-block text-sm font-medium text-gray-800"
         >
-          Description
+          Description*
         </label>
         <textarea
           id="af-submit-app-description"
           className="w-full cursor-text resize-none rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm hover:border-black"
           rows={6}
           placeholder="A succinct explanation of your model"
+          onChange={(e) => handleInputChange(e, "description")}
+          value={model.description}
         ></textarea>
       </div>
       <div className="space-y-2">

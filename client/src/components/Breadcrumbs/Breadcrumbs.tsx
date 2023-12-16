@@ -4,10 +4,12 @@ export default function Breadcrumbs({
   crumbs,
   stage,
   setStage,
+  validModel,
 }: {
   crumbs: string[];
   stage: number;
   setStage: (state: number) => void;
+  validModel: boolean;
 }) {
   return (
     <section>
@@ -31,7 +33,9 @@ export default function Breadcrumbs({
                       className={`ml-4 text-sm font-medium ${
                         stage === index ? "text-blue-500" : "text-gray-500"
                       } hover:scale-95 hover:text-gray-700`}
-                      onClick={() => setStage(index)}
+                      onClick={() =>
+                        validModel ? setStage(index) : setStage(stage)
+                      }
                     >
                       {crumb}
                     </a>

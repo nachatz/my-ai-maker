@@ -8,4 +8,10 @@ type Row = {
   type?: string;
 };
 
-export type { Row, RowArray };
+type ModelCreate = {
+  title?: string;
+  description?: string;
+  type?: string;
+};
+
+export type { Row, RowArray, ModelCreate };

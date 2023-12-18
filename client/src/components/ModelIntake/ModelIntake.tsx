@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 import { ModelsService } from "~/services";
+import { formatDictionary } from "~/lib/utils/formatter";
 
 //components
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
@@ -19,9 +20,11 @@ import { variants } from "./variants";
 // assets
 import logo from "~/../public/myaimaker-logo.png";
 import "react-toastify/dist/ReactToastify.css";
+import { api } from "~/utils/api";
 
 export default function ModelIntake() {
   const router = useRouter();
+  const createModelMutation = api.models.createModel.useMutation();
   const [isGenerating, setIsGenerating] = useState(false);
   const [stage, setStage] = useState(0);
   const [rows, setRows] = useState<Row[]>([]);
@@ -83,7 +86,7 @@ export default function ModelIntake() {
   };
 
   /**
-   * Handles the submission of the model.
+   * Handles the submission of the model. Creates in the database and generates code.
    *
    * @return {Promise<void>} - A promise that resolves when the model submission is complete.
    */
@@ -94,7 +97,19 @@ export default function ModelIntake() {
       rows,
     );
 
+    const formattedData = {
+      title: model.title!,
+      type: model.type!,
+      description: model.description!,
+      modelString: data.message as string,
+      features: {} as Record<string, string>,
+      transformations: {} as Record<string, string>,
+    };
+
+    formatDictionary(rows, formattedData.features);
+
     if (data.statusCode === 200) {
+      await createModelMutation.mutateAsync(formattedData);
       router.reload();
       return;
     }

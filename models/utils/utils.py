@@ -1,4 +1,19 @@
 import torch
+import pandas as pd
+
+
+def preprocess_data(csv_file):
+    """
+    Read a CSV file and preprocess the data.
+
+    Parameters:
+        csv_file (str): The path to the CSV file.
+
+    Returns:
+        pandas.DataFrame: The preprocessed data as a DataFrame.
+    """
+    df = pd.read_csv(csv_file)
+    return df
 
 
 def init_weights(m: torch.nn.Module) -> None:

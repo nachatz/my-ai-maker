@@ -1,36 +1,42 @@
-from flask import Flask, request, jsonify
-import pandas as pd
 import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.utils.data as data
-import threading
-from model import Feedforward 
+from api.models import Endpoints
 from api.models.response import Response
+from exceptions.api import BadFileFormatException
+from utils import preprocess_data
+from flask import Flask, request
 
 app = Flask(__name__)
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def preprocess_data(csv_file):
-    df = pd.read_csv(csv_file)
-    return df
 
-@app.route('/upload', methods=['POST'])
+@app.route(Endpoints.UPLOAD, methods=["POST"])
 def upload():
-    if 'file' not in request.files:
-        res = Response("No file found", 400)
-    else:
-        file = request.files['file']
-        if file.filename == '' or not file.filename.lower().endswith(('.csv')):
-            res = Response("Bad file format", 400)
-        else:
-            try:
-                df = preprocess_data(file)
-                res = Response("CSV processed", 200)
-            except Exception as e:
-                res = Response.Response("Internal server error in upload", 500)
+    """
+    Handles the file upload request.
 
-    return res.output()
+    This function is responsible for handling the POST request to the '/upload' endpoint. It expects a file to be included in the request payload.
+    If the file is missing, has an empty filename, or is not in CSV format, it will return a 'Bad file format' response with a status code of 400.
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, threaded=True)
+    Returns:
+    - If the file is successfully processed, it returns a 'CSV processed' response with a status code of 200.
+    - If a KeyError occurs during the file processing, it returns a 'Bad file format' response with the specific error message and a status code of 400.
+    - If any other exception occurs during the file processing, it returns an 'Internal server error in upload' response with the specific error message and a status code of 500.
+    """
+    try:
+        file = request.files["file"]
+        if (
+            not file
+            or file.filename == ""
+            or not file.filename.lower().endswith((".csv"))
+        ):
+            raise BadFileFormatException()
+        preprocess_data(file)
+    except BadFileFormatException as e:
+        return Response(f"Bad file format {e}", 400)
+    except Exception as e:
+        return Response(f"Internal server error in upload {e}", 500)
+    return Response("CSV processed", 200)
+
+
+if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    app.run(host="0.0.0.0", port=5000, threaded=True)

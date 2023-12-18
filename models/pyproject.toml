@@ -1,0 +1,23 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "my-ai-maker-validation"
+version = "1.0.0"
+description = "my-ai-maker requires end-2-end validation of generated models. This functions as a integration for qa -> prod"
+authors = ["Nikolas Achatz"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+torch = "^2.1.2"
+flask = "^3.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "*"
+black = "*"
+pytest = "*"
+pytest-cov = "*"
+prospector = "^1.10.2"
+types-requests = "^2.31.0" 

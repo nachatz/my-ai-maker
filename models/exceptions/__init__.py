@@ -1,3 +1,3 @@
-from models.exceptions import BadFileFormatException
+from exceptions.api import BadFileFormatException
 
 __all__ = ["BadFileFormatException"]

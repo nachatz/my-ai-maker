@@ -1,7 +1,7 @@
 import torch
-from api.models import Endpoints
+from endpoints import Endpoints
 from api.models.response import Response
-from exceptions.api import BadFileFormatException
+from exceptions import BadFileFormatException
 from utils import preprocess_data
 from flask import Flask, request
 

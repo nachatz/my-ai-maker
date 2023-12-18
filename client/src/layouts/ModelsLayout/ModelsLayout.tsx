@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ModelsNav, RouteHeader, CardGrid, ModelIntake } from "~/components";
+import { ModelsNav, RouteHeader, CardGrid, ModelIntake, LoadingOverlay } from "~/components";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
@@ -29,7 +29,7 @@ export default function ModelsLayout() {
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState("current");
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return <LoadingOverlay isLoading={true}/>
   if (!data) {
     void push(`/auth/login`);
     return null;

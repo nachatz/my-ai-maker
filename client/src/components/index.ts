@@ -17,4 +17,5 @@ export { default as Stats } from "./Stats/Stats";
 export { default as ModelsNav } from "./ModelsNav/ModelsNav";
 export { default as ModelIntake } from "./ModelIntake/ModelIntake";
 export { default as RouteHeader } from "./RouteHeader/RouteHeader";
+export { default as LoadingOverlay } from "./LoadingOverlay/LoadingOverlay";
 export { default as LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";

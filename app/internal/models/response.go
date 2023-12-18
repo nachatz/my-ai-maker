@@ -6,5 +6,5 @@ type Response struct {
 	   @Field StatusCode - The status code of the response.
 	*/
 	Message    interface{} `json:"message"`
-	StatusCode int
+	StatusCode int         `json:"statusCode"`
 }

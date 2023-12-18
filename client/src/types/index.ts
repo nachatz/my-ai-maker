@@ -18,4 +18,4 @@ export type { StatsProps } from "./components/Stats";
 
 // API
 export type { AiMakerResponse, Fetch, FetchError } from "./api/fetch";
-export type { Model } from "./api/model";
+export type { GetModel, PostModel } from "./api/model";

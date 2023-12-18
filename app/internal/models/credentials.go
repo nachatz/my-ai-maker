@@ -5,6 +5,6 @@ type ClientCredentials struct {
 	   @Field ClientSecret - Client secret.
 	   @Field ClientId - Client ID.
 	*/
-	ClientSecret string `json:"client-secret"`
-	ClientID     string `json:"client-id"`
+	ClientSecret string `json:"clientSecret"`
+	ClientID     string `json:"clientId"`
 }

@@ -1,7 +1,14 @@
-interface Model {
+interface GetModel {
   name: string;
   language: string;
   library: string;
 }
 
-export type { Model };
+interface PostModel {
+  features: Record<string, string>;
+  language: string;
+  library: string;
+  model: string;
+}
+
+export type { GetModel, PostModel };

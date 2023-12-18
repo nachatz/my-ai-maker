@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { customDropdown } from "./dropdown-options";
 import { ModelsService } from "~/services";
-import type { Fetch, Model, ModelCreate } from "~/types";
+import type { Fetch, GetModel, ModelCreate } from "~/types";
 import Select from "react-select";
 
 export default function MetadataIntake({
@@ -13,7 +13,7 @@ export default function MetadataIntake({
 }) {
   // Variables
   const router = useRouter();
-  const { data, error, isLoading }: Fetch<Model> =
+  const { data, error, isLoading }: Fetch<GetModel> =
     ModelsService.useAvailableModels();
 
   // Model fetch results
@@ -22,7 +22,7 @@ export default function MetadataIntake({
 
   // Options for model type
   const options = data
-    ? data.map((model: Model) => ({
+    ? data.map((model: GetModel) => ({
         value: model.name.toLowerCase(),
         label: model.name,
       }))

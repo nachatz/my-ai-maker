@@ -1,12 +1,12 @@
-import type { Model } from "./model";
+import type { GetModel } from "./model";
 interface Fetch<T> {
   data?: T[];
   error?: FetchError;
   isLoading: boolean;
 }
 
-interface AiMakerResponse<T = string | Model[]> {
-  statuscode: number;
+interface AiMakerResponse<T = string | GetModel[]> {
+  statusCode: number;
   message: T;
 }
 

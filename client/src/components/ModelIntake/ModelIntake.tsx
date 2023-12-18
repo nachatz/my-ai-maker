@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import { Breadcrumbs } from "~/components";
 import { ToastContainer, toast } from "react-toastify";
-import type { Row, ModelCreate } from "~/types";
+import { Breadcrumbs } from "~/components";
+import { ModelsService } from "~/services";
+import type { Row, ModelCreate, AiMakerResponse } from "~/types";
 import MetadataIntake from "./MetadataIntake/MetadataIntake";
 import FeatureIntake from "./FeatureIntake/FeatureIntake";
+import ReviewIntake from "./ReviewIntake/ReviewIntake";
 import logo from "~/../public/myaimaker-logo.png";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,12 +20,14 @@ export default function ModelIntake() {
     type: "",
   });
 
-  const crumbs = ["Metadata", "Data"];
+  const crumbs = ["Metadata", "Data", "Review"];
   const view = [
     <MetadataIntake key={"intake"} model={model} setModel={setModel} />,
     <FeatureIntake key={"feature"} rows={rows} setRows={setRows} />,
+    <ReviewIntake key={"review"} model={model} />,
   ];
 
+  const isComplete = stage === view.length - 1;
   const variants = {
     hidden: { y: "-100vh", opacity: 0 },
     visible: {
@@ -45,9 +49,14 @@ export default function ModelIntake() {
    * @return {boolean} Returns true if the model is complete, false otherwise.
    */
   const validateStage = (stageData: ModelCreate, disabled = false) => {
-    const isModelComplete = Object.values(model).every(
-      (value) => value !== undefined && value.trim() !== "",
-    );
+    let isModelComplete = false;
+    if (stage == 0) {
+      isModelComplete = Object.values(model).every(
+        (value) => value !== undefined && value.trim() !== "",
+      );
+    } else {
+      isModelComplete = rows != null && rows.length > 0;
+    }
 
     if (!isModelComplete && !disabled) {
       toast.info("Please fill in all fields", {
@@ -72,6 +81,26 @@ export default function ModelIntake() {
   const handleNextStage = () => {
     if (validateStage(model)) {
       setStage(stage + 1 < view.length ? stage + 1 : stage);
+    }
+  };
+
+  const handleModelSubmit = async () => {
+    const data: AiMakerResponse = await ModelsService.requestGenerateModel(
+      model,
+      rows,
+    );
+
+    if (data.statusCode !== 200) {
+      toast.error("Request failed... try again later", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
@@ -107,9 +136,9 @@ export default function ModelIntake() {
                   <button
                     type="button"
                     className="mb-2 inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-400 disabled:pointer-events-none disabled:opacity-50"
-                    onClick={() => handleNextStage()}
+                    onClick={isComplete ? handleModelSubmit : handleNextStage}
                   >
-                    Next
+                    {isComplete ? "Submit" : "Next"}
                     <ArrowRightIcon className="h-5 w-5" />
                   </button>
                 </div>

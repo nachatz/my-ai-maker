@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export default function CardGrid({ cards }: CardArray) {
   const [animationComplete, setAnimationComplete] = useState(false);
-
   const cardItems = cards;
 
   return (

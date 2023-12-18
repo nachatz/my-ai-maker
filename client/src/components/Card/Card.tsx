@@ -6,7 +6,18 @@ import {
 } from "@heroicons/react/24/outline";
 import type { CardType } from "~/types";
 
-type IconMap = Record<string, React.ComponentType<React.RefAttributes<SVGSVGElement>>>;
+type IconMap = Record<
+  string,
+  React.ComponentType<React.RefAttributes<SVGSVGElement>>
+>;
+
+{
+  /*(iconMap[card.icon] ??
+ const color = {
+  backgroundColor: card.color ?? "blue",
+  stroke: card.color ?? "blue",
+}; */
+}
 
 const iconMap: IconMap = {
   global: GlobeAltIcon,
@@ -16,8 +27,11 @@ const iconMap: IconMap = {
 };
 
 export default function Card(card: CardType) {
-  const SelectedIcon = iconMap[card.icon] ?? CubeTransparentIcon;
-  const color = { backgroundColor: card.color, stroke: card.color };
+  const SelectedIcon = CubeTransparentIcon;
+  const color = {
+    backgroundColor: "blue",
+    stroke: "blue",
+  };
 
   return (
     <div className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -44,18 +58,12 @@ export default function Card(card: CardType) {
         <h3 className="text-xl font-semibold text-gray-800">{card.title}</h3>
         <p className="mt-3 text-gray-500">{card.description}</p>
       </div>
-      <div className="cursor-pointer mt-auto flex divide-x divide-gray-200 border-t border-gray-200">
+      <div className="mt-auto flex cursor-pointer divide-x divide-gray-200 border-t border-gray-200">
         <a
-          className="inline-flex w-full items-center justify-center gap-2 rounded-bl-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
           href="#"
         >
-          View Models
-        </a>
-        <a
-          className="inline-flex w-full items-center justify-center gap-2 rounded-br-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
-          href="#"
-        >
-          Update Model
+          View Model
         </a>
       </div>
     </div>

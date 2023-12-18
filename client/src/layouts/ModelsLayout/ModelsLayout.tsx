@@ -1,35 +1,24 @@
 import { useState } from "react";
-import { ModelsNav, RouteHeader, CardGrid, ModelIntake, LoadingOverlay } from "~/components";
+import { api } from "~/utils/api";
+import {
+  ModelsNav,
+  RouteHeader,
+  CardGrid,
+  ModelIntake,
+  LoadingOverlay,
+} from "~/components";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
-
-const mockedData = [
-  {
-    title: "MyModel1",
-    type: "feed forward",
-    description: "My sample model that predicts markets",
-    code: "print('hi')",
-    icon: "global",
-    color: "blue",
-  },
-  {
-    title: "MyModel2",
-    type: "feed forward",
-    description: "My sample model2 that predicts animal height",
-    code: "print('hi')",
-    icon: "variable",
-    color: "black",
-  },
-];
 
 export default function ModelsLayout() {
   const { data, status } = useSession();
   const { push } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState("current");
+  const models = api.models.getModels.useQuery();
 
-  if (status === "loading") return <LoadingOverlay isLoading={true}/>
+  if (status === "loading") return <LoadingOverlay isLoading={true} />;
   if (!data) {
     void push(`/auth/login`);
     return null;
@@ -50,7 +39,11 @@ export default function ModelsLayout() {
           {view === "new" ? (
             <ModelIntake key="modelIntake" />
           ) : (
-            <CardGrid key="cardGrid" cards={mockedData} />
+            <>
+              {models.data !== undefined && (
+                <CardGrid key="cardGrid" cards={models.data} />
+              )}
+            </>
           )}
         </AnimatePresence>
       </div>

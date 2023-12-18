@@ -61,7 +61,7 @@ model Model {
   title           String
   description     String
   type            String
-  model_string    String
+  modelString     String
   features        Json  
   transformations Json    
   userId          String

@@ -40,4 +40,21 @@ export const modelsRouter = createTRPCRouter({
       });
       return newModel;
     }),
+
+  deleteModel: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      const deletedModel = await ctx.db.model.delete({
+        where: {
+          id: input.id,
+          userId: userId,
+        },
+      });
+      return deletedModel;
+    }),
 });

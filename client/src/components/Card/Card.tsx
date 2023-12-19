@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { api } from "~/utils/api";
 import {
   GlobeAltIcon,
   VariableIcon,
@@ -6,6 +7,7 @@ import {
   CloudIcon,
 } from "@heroicons/react/24/outline";
 import type { CardType } from "~/types";
+import { useRouter } from "next/router";
 
 type IconMap = Record<
   string,
@@ -29,10 +31,17 @@ const iconMap: IconMap = {
 
 export default function Card(card: CardType) {
   const [isViewed, setViewed] = useState(false);
+  const router = useRouter();
+  const deleteModelMutation = api.models.deleteModel.useMutation();
   const SelectedIcon = CubeTransparentIcon;
   const color = {
     backgroundColor: "blue",
     stroke: "blue",
+  };
+
+  const handleDelete = async (): Promise<void> => {
+    await deleteModelMutation.mutateAsync({ id: card.id });
+    router.reload();
   };
 
   return (
@@ -72,11 +81,18 @@ export default function Card(card: CardType) {
       )}
       <div className="mt-auto flex cursor-pointer divide-x divide-gray-200 border-t border-gray-200">
         <a
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-bl-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
           href="#"
           onClick={() => setViewed((prevValue) => !prevValue)}
         >
           {isViewed ? "View Metadata" : "View Model"}
+        </a>
+        <a
+          className="inline-flex w-full items-center justify-center gap-2 rounded-br-xl bg-white px-4 py-3 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white sm:p-4"
+          href="#"
+          onClick={() => void handleDelete()}
+        >
+          Delete Model
         </a>
       </div>
     </div>

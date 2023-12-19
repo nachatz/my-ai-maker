@@ -1,4 +1,4 @@
-import { Row } from "~/types";
+import type { Row } from "~/types";
 
 /**
  * Formats a dictionary by populating it with feature names and types from an array of rows.

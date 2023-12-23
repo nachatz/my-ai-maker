@@ -1,5 +1,6 @@
 export { default as Banner } from "./Banner/Banner";
 export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
+export { default as CodeViewer } from "./CodeViewer/CodeViewer";
 export { default as HomeContent } from "./Content/Home/Content";
 export { default as DocsContent } from "./Content/Docs/Content";
 export { default as Faq } from "./Faq/Faq";

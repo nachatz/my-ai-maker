@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { Session } from "next-auth/core/types";
 import { Menu, Transition } from "@headlessui/react";
+import { useModelLayoutContext } from "~/context";
 import { Fragment } from "react";
 import { classNames } from "~/lib/utils/utils";
 import { signOut } from "next-auth/react";
@@ -10,16 +11,13 @@ import Link from "next/link";
 export default function ModelsNav({
   profile,
   isOpen,
-  view,
   setIsOpen,
-  setView,
 }: {
   profile: Session["user"];
   isOpen: boolean;
-  view: string;
   setIsOpen: (isOpen: boolean) => void;
-  setView: (view: string) => void;
 }) {
+  const { view, setView } = useModelLayoutContext();
   useEffect(() => {
     function handleWindowResize() {
       const isLargerScreen = window.innerWidth > 640;
@@ -42,7 +40,7 @@ export default function ModelsNav({
         <div
           id="application-sidebar"
           className={`hs-overlay scrollbar-y fixed bottom-0 left-0 top-12 w-64 transform overflow-y-auto rounded-r-xl border-r border-gray-200 bg-white pb-10 pt-7 shadow-2xl transition-all duration-1000 ${
-            isOpen ? "z-20 lg:translate-x-0" : "z-[-1] -translate-x-full"
+            isOpen ? "z-[15] lg:translate-x-0" : "z-[-1] -translate-x-full"
           }`}
         >
           <div className="px-6">

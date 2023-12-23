@@ -1,5 +1,10 @@
 import { ModelsLayout } from "~/layouts";
+import { ModelLayoutProvider } from "~/context";
 
 export default function Models() {
-  return <ModelsLayout />;
+  return (
+    <ModelLayoutProvider>
+      <ModelsLayout />
+    </ModelLayoutProvider>
+  );
 }

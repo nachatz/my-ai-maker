@@ -13,6 +13,21 @@ export const modelsRouter = createTRPCRouter({
     });
   }),
 
+  getModelById: protectedProcedure
+    .input(
+      z.object({
+        modelId: z.string(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.db.model.findUnique({
+        where: {
+          id: input.modelId,
+          userId: ctx.session.user.id,
+        },
+      });
+    }),
+
   createModel: protectedProcedure
     .input(
       z.object({

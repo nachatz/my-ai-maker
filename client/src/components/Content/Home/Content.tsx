@@ -1,5 +1,7 @@
 import { Banner } from "~/components";
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
+
 export default function Content() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -91,9 +93,12 @@ export default function Content() {
             technology.
           </p>
           <div className="mt-8 flex justify-center">
-            <button className="rounded-md bg-primary-500 px-6 py-2 font-semibold text-white shadow-md hover:bg-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 focus:ring-offset-1">
+            <Link
+              href="/models"
+              className="rounded-md bg-primary-500 px-6 py-2 font-semibold text-white shadow-md hover:bg-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 focus:ring-offset-1"
+            >
               Try it now (it&apos;s free!)
-            </button>
+            </Link>
           </div>
         </div>
         <Banner />
